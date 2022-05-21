@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/enzo/travail/c/operation_function/op.c
+stdlib.h
+-
+stdio.h
+-
+math.h
+-
+string.h
+-
+stdbool.h
+-
+
