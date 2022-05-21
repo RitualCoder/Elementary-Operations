@@ -37,7 +37,7 @@ bool remove_char(char *s, int pos){
 
 
 char * addition(char *a, char *b){
-    char *sum;
+    char *sum = malloc(100 * sizeof(char));
     char *str1 = malloc(100 * sizeof(char));
     char *str2 = malloc(100 * sizeof(char));
     strcpy(str1, a);
