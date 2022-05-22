@@ -1,3 +1,0 @@
-/home/enzo/travail/c/operation_function/build/CMakeFiles/rebuild_cache.dir
-/home/enzo/travail/c/operation_function/build/CMakeFiles/edit_cache.dir
-/home/enzo/travail/c/operation_function/build/CMakeFiles/operation.dir
