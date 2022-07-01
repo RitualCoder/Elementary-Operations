@@ -21,8 +21,8 @@
 
 
 char *addition(op var, char *a, char *b){
-    var->num1 = a;
-    var->num2 = b;
+    strcpy(var->num1, a);
+    strcpy(var->num2, b);
 
     int len1 = strlen(var->num1);
     int len2 = strlen(var->num2);
@@ -62,8 +62,12 @@ char *addition(op var, char *a, char *b){
 }
 
 char * substraction(op var, char* a, char* b){
+    strcpy(var->num1, a);
+    strcpy(var->num2, b);
+
     int len1 = strlen(var->num1);
     int len2 = strlen(var->num2);
+
 
     // check si la valeur de num2 > num1
     int superior = 0;
@@ -143,8 +147,8 @@ char * substraction(op var, char* a, char* b){
 
 
 char * multiplication(op var, char *a, char *b){
-    var->num1 = a;
-    var->num2 = b;
+    strcpy(var->num1, a);
+    strcpy(var->num2, b);
 
     // Operation
     int mul, i, j;
@@ -171,7 +175,8 @@ char * multiplication(op var, char *a, char *b){
     return var->result;
 }
 
-char *division(op var, char *dividend,long divisor){
+char * division(op var, char *dividend,long divisor){
+    strcpy(var->num1, dividend);
     long temp = 0;
     int i = 0, j = 0;
 
@@ -186,7 +191,7 @@ char *division(op var, char *dividend,long divisor){
         }
         i++;
     }
-    
+
     // Traitement des "0" en trop
     inverser(var->result);
     i = strlen(var->result) - 1;
@@ -207,41 +212,48 @@ void usage(){
                     "sub\n"
                     "mul\n"
                     "div\n\n");
-    fprintf(stderr, "La limite de caractère pour num1 et num2 est 50.\n");
+    fprintf(stderr, "La limite de caractère pour num1 et num2 est 100.\n");
 }
 
 
 int main(int argc, char *argv[]){
+    // if there is not command
     if (argc != 2 || strcmp(argv[1], "usage") == 0){
         usage();
         return 0;
     }
+
+    char a[50];
+    char b[50];
     op var = init(100);
     printf("Veuillez saisir le premier nombre : ");
-    scanf("%s", var->num1);
+    scanf("%s", a);
     printf("Veuillez saisir le deuxième nombre : ");
-    scanf("%s",var->num2);
+    scanf("%s", b);
     printf("\n");
     
     if (strcmp(argv[1], "add") == 0){
-        addition(var, var->num1, var->num2);
+        addition(var, a, b);
+        op_delete(var);
         return 1;
     }
     else if (strcmp(argv[1], "sub") == 0){
-        substraction(var, var->num1, var->num2);
+        substraction(var, a, b);
         op_delete(var);
         return 1;
     }
     else if (strcmp(argv[1], "mul") == 0){
-        multiplication(var, var->num1, var->num2);
+        multiplication(var, a, b);
         op_delete(var);
         return 1;
     }
     else if (strcmp(argv[1], "div") == 0){
-        division(var, var->num1, atoi(var->num2));
+        division(var, a, atoi(b));
         op_delete(var);
         return 1;
     }
+
+    // if the user type a wrong command
     usage();
     op_delete(var);
     return 0;
