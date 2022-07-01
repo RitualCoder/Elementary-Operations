@@ -44,5 +44,12 @@ void op_delete(op operation);
  **/
 op init(int length);
 
+/**
+ * @brief Check if the string is valide integer
+ * @param length The string
+ * @return A boolean
+ **/
+bool check_str(char *str);
+
 
 #endif

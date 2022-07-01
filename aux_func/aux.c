@@ -15,6 +15,7 @@
 #include <stdbool.h>
 #include <string.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 #include "../op_struct/private.h"
 #include "../op.h"
@@ -70,4 +71,21 @@ op init(int length){
     operation->num2 = malloc(length*sizeof(char));
     operation->result = malloc(length*sizeof(char));
     return operation;
+}
+
+bool check_str(char *str){
+    int len = strlen(str);
+    if (len > 1){
+        if (str[0] == 48){
+            printf("delete unnecessary 0's\n");
+            return false;
+        }
+    }
+    for (int i = 0; i < len; i++){
+        if (str[i] < 48 || str[i]> 57){
+            printf("Not an integer\n");
+            return false;
+        }
+    }
+    return true;
 }
