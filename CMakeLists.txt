@@ -5,7 +5,7 @@ project(operation)
 
 set(CMAKE_C_FLAGS "-std=c99 -g -Wall")
 
-add_library(op aux.c)
+add_library(op aux_func/aux.c)
 
 add_executable(operation op.c)
 
