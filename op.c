@@ -4,36 +4,9 @@
 #include <string.h>
 #include <stdbool.h>
 
-/* Fonctions auxiliares */
-
-char *inverser(char *str){
-    if (!str || ! *str)
-        return str;
-    int i = strlen(str) - 1, j = 0;
-    char ch;
-    while (i > j){
-        ch = str[i];
-        str[i] = str[j];
-        str[j] = ch;
-        i--;
-        j++;
-    }
-    return str;
-}
-
-bool remove_char(char *s, int pos){
-    int length = strlen(s);
-    if (pos >= length){
-        return false;
-    } 
-    for (int i = pos; i < length; i++){
-        s[i] = s[i + 1];
-    }
-    return true;
-}
-
-/* Fin fonctions auxiliaires */
-
+#include "op.h"
+#include "aux.h"
+#include "private.h"
 
 
 char * addition(char *a, char *b){
@@ -206,11 +179,42 @@ char * multiplication(char *a, char *b){
     return res;
 }
 
+char * division(char *dividend,long divisor){
+    static char quotient[500];
+    long temp = 0;
+    int i = 0, j = 0;
+
+    while(dividend[i]){
+        temp = temp * 10 + (dividend[i] - '0');
+        if(temp < divisor){
+            quotient[j++] = '0';
+        }
+        else{
+            quotient[j++] = (temp / divisor) + '0';
+            temp = temp % divisor;
+        }
+        i++;
+    }
+    
+    // Traitement des "0" en trop
+    inverser(quotient);
+    i = strlen(quotient) - 1;
+    while (quotient[i] == '0' && i != 0){
+        remove_char(quotient, i);
+        i--;
+    }
+    inverser(quotient);
+
+    quotient[j] = '\0';
+    printf("%s / %ld = %s\n", dividend, divisor, quotient);
+    return quotient;
+}
+
 void usage(){
     fprintf(stderr,"Usage : ./operation <operator>\n\n");
     fprintf(stderr, "add\n"
                     "sub\n"
-                    "mult\n"
+                    "mul\n"
                     "div\n\n");
     fprintf(stderr, "La limite de caractère pour num1 et num2 est 50.\n");
 }
@@ -253,14 +257,14 @@ int main(int argc, char *argv[]){
         free(res);
         return 1;
     }
-    else if (strcmp(argv[1], "mult") == 0){
+    else if (strcmp(argv[1], "div") == 0){
+        long int num;
         printf("Veuillez saisir le premier nombre : ");
         scanf("%s", num1);
         printf("Veuillez saisir le deuxième nombre : ");
-        scanf("%s", num2);
+        scanf("%ld", &num);
         printf("\n");
-        char *res = multiplication(num1, num2);
-        free(res);
+        char *res = division(num1, num);
         return 1;
     }
     usage();
