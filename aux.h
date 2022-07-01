@@ -2,7 +2,7 @@
 #define __AUX_H__
 #include <string.h>
 #include <stdbool.h>
-
+#include "op.h"
 
 /**
  * @brief Reverse a string
@@ -18,6 +18,20 @@ char *inverser(char *str);
  * @return the new string
  **/
 bool remove_char(char *s, int pos);
+
+/**
+ * @brief Free op struct
+ * @param operation The op struct to delete
+ * @return void
+ **/
+void op_delete(op operation);
+
+/**
+ * @brief Initialize the new struct
+ * @param length The length of the string
+ * @return The new struct
+ **/
+op init(int length);
 
 
 #endif

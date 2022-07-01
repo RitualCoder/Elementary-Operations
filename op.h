@@ -2,41 +2,46 @@
 #define __OP_H__
 
 /**
+ * @brief The structure pointer that stores the operation state.
+ **/
+typedef struct op_s* op;
+
+/**
  * @brief Standard unsigned integer type.
  **/
 typedef unsigned int uint;
 
 /**
  * @brief Sum of 2 strings numbers
- * @param num1 the first string number
- * @param num2 the second string number
- * @return the sum in a string
+ * @param num1 The first string number
+ * @param num2 The second string number
+ * @return The sum in a string
  **/
-char* addition(char* num1, char* num2);
+char *addition(char* num1, char* num2);
 
 
 /**
- * @brief difference between 2 strings numbers
- * @param num1 the first string number
- * @param num2 the second string number
- * @return the difference in a string
+ * @brief Difference between 2 strings numbers
+ * @param num1 The first string number
+ * @param num2 The second string number
+ * @return The difference in a string
  **/
-char* substraction(char* num1, char* num2);
+char *substraction(char* num1, char* num2);
 
 /**
  * @brief Product of 2 strings numbers
- * @param num1 the first string number
- * @param num2 the second string number
- * @return the product in a string
+ * @param num1 The first string number
+ * @param num2 The second string number
+ * @return The product in a string
  **/
-char* multiplication(char* num1, char* num2);
+char *multiplication(char* num1, char* num2);
 
 /**
  * @brief Quotient of 2 strings numbers
- * @param num1 the first string number
- * @param num2 the second string number
+ * @param num1 The first string number
+ * @param num2 The second string number
  * @return The quotient in a string
  **/
-char* division(char* num1, long num2);
+char *division(char* num1, long num2);
 
 #endif

@@ -264,7 +264,7 @@ int main(int argc, char *argv[]){
         printf("Veuillez saisir le deuxième nombre : ");
         scanf("%ld", &num);
         printf("\n");
-        char *res = division(num1, num);
+        division(num1, num);
         return 1;
     }
     usage();
