@@ -55,4 +55,13 @@ char *multiplication(op var, char* num1, char* num2);
  **/
 char *division(op var, char* num1, long num2);
 
+
+/**
+ * @brief Pow with a string and a long
+ * @param num1 The first string number
+ * @param pow1 The second long integer
+ * @return The pow in a string
+**/
+char *test(op var, char *num1, long pow1);
+
 #endif

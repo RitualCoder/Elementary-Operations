@@ -206,6 +206,21 @@ char * division(op var, char *dividend,long divisor){
     return var->result;
 }
 
+char *test(op var, char *a, long pow1){
+    var->num1 = a;
+    long temp = pow1;
+    printf("ok %ld\n", temp);
+    //var->result = "1";
+    printf("ok\n\n");
+    while (temp != 0){
+        printf("ok %ld\n", temp);
+        //var->result = multiplication(var, var->result, var->num1);
+        temp = temp - 1;
+    }
+    // printf("%s^%ld = %s", a, pow1, var->result);
+    return var->result;
+}
+
 void usage(){
     fprintf(stderr,"Usage : ./operation <operator>\n\n");
     fprintf(stderr, "add\n"
@@ -246,6 +261,10 @@ int main(int argc, char *argv[]){
         }
         else if (strcmp(argv[1], "div") == 0){
             division(var, a, atoi(b));
+            op_delete(var);
+        }
+        else if (strcmp(argv[1], "pow") == 0){
+            test(var, a, atoi(b));
             op_delete(var);
         }
         return 1;
