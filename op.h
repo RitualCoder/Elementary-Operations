@@ -1,3 +1,14 @@
+/**
+ * @file op.h
+ * @author Enzo Cornaggia (enzo.cornaggia@icloud.com)
+ * @brief Basic functions of elementary operations with strings
+ * @version 0.1
+ * @date 2022-07-01
+ *
+ * @copyright Copyright (c) 2022
+ *
+ **/
+
 #ifndef __OP_H__
 #define __OP_H__
 

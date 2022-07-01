@@ -1,3 +1,14 @@
+/**
+ * @file aux.h
+ * @author Enzo Cornaggia (enzo.cornaggia@icloud.com)
+ * @brief Basic auxiliary functions for elementary operations
+ * @version 0.1
+ * @date 2022-07-01
+ *
+ * @copyright Copyright (c) 2022
+ *
+ **/
+
 #ifndef __AUX_H__
 #define __AUX_H__
 #include <string.h>

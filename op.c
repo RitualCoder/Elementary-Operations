@@ -1,3 +1,14 @@
+/**
+ * @file op.c
+ * @author Enzo Cornaggia (enzo.cornaggia@icloud.com)
+ * @brief Basic functions for elementary operations
+ * @version 0.1
+ * @date 2022-07-01
+ *
+ * @copyright Copyright (c) 2022, Enzo Cornaggia
+ *
+ **/
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
