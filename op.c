@@ -175,7 +175,7 @@ char * multiplication(op var, char *a, char *b){
     return var->result;
 }
 
-char * division(op var, char *dividend,long divisor){
+char * division(op var, char *dividend, long divisor){
     strcpy(var->num1, dividend);
     long temp = 0;
     int i = 0, j = 0;
@@ -207,17 +207,19 @@ char * division(op var, char *dividend,long divisor){
 }
 
 char *test(op var, char *a, long pow1){
-    var->num1 = a;
+    strcpy(var->num1, a);
+    // printf("%s\n", var->num1);
     long temp = pow1;
-    printf("ok %ld\n", temp);
-    //var->result = "1";
-    printf("ok\n\n");
+    var->result[0] = '1';
     while (temp != 0){
-        printf("ok %ld\n", temp);
-        //var->result = multiplication(var, var->result, var->num1);
-        temp = temp - 1;
+        var->result = multiplication(var, var->num1, var->result);
+        if (strlen(var->result) > 100){
+            printf("too big\n");
+            return "ok";
+        }
+        temp--;
     }
-    // printf("%s^%ld = %s", a, pow1, var->result);
+    printf("%s^%ld = %s\n", a, pow1, var->result);
     return var->result;
 }
 
@@ -240,7 +242,7 @@ int main(int argc, char *argv[]){
 
     char a[50];
     char b[50];
-    op var = init(100);
+    op var = init_(100);
     printf("Veuillez saisir le premier nombre : ");
     scanf("%s", a);
     printf("Veuillez saisir le deuxième nombre : ");

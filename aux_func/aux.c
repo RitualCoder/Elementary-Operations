@@ -63,7 +63,7 @@ void op_delete(op operation){
     return;
 }
 
-op init(int length){
+op init_(int length){
     assert(length);
     op operation = (op)malloc(sizeof(op));
     assert (operation);

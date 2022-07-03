@@ -42,7 +42,7 @@ void op_delete(op operation);
  * @param length The length of the string
  * @return The new struct
  **/
-op init(int length);
+op init_(int length);
 
 /**
  * @brief Check if the string is valide integer
