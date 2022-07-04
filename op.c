@@ -146,7 +146,7 @@ char * substraction(op var, char* a, char* b){
 
 
 
-char * multiplication(op var, char *a, char *b){
+char * multiplication(op var, char *a, char *b, bool auxi){
     strcpy(var->num1, a);
     strcpy(var->num2, b);
 
@@ -171,7 +171,9 @@ char * multiplication(op var, char *a, char *b){
     }
     inverser(var->result);
 
-    printf("%s * %s = %s\n",a , b, var->result);
+    if (!auxi){
+        printf("%s * %s = %s\n",a , b, var->result);
+    }
     return var->result;
 }
 
@@ -206,13 +208,13 @@ char * division(op var, char *dividend, long divisor){
     return var->result;
 }
 
-char *test(op var, char *a, long pow1){
+char *pow_(op var, char *a, long pow1){
     strcpy(var->num1, a);
     // printf("%s\n", var->num1);
     long temp = pow1;
     var->result[0] = '1';
     while (temp != 0){
-        var->result = multiplication(var, var->num1, var->result);
+        var->result = multiplication(var, var->num1, var->result, true);
         if (strlen(var->result) > 100){
             printf("too big\n");
             return "ok";
@@ -223,61 +225,4 @@ char *test(op var, char *a, long pow1){
     return var->result;
 }
 
-void usage(){
-    fprintf(stderr,"Usage : ./operation <operator>\n\n");
-    fprintf(stderr, "add\n"
-                    "sub\n"
-                    "mul\n"
-                    "div\n\n");
-    fprintf(stderr, "La limite de caractère pour num1 et num2 est 100.\n");
-}
 
-
-int main(int argc, char *argv[]){
-    // if there is not command
-    if (argc != 2 || strcmp(argv[1], "usage") == 0){
-        usage();
-        return 0;
-    }
-
-    char a[50];
-    char b[50];
-    op var = init_(100);
-    printf("Veuillez saisir le premier nombre : ");
-    scanf("%s", a);
-    printf("Veuillez saisir le deuxième nombre : ");
-    scanf("%s", b);
-    printf("\n");
-    if (check_str(a) && check_str(b)){
-        if (strcmp(argv[1], "add") == 0){
-            addition(var, a, b);
-            op_delete(var);
-        }
-        else if (strcmp(argv[1], "sub") == 0){
-            substraction(var, a, b);
-            op_delete(var);
-        }
-        else if (strcmp(argv[1], "mul") == 0){
-            multiplication(var, a, b);
-            op_delete(var);
-        }
-        else if (strcmp(argv[1], "div") == 0){
-            division(var, a, atoi(b));
-            op_delete(var);
-        }
-        else if (strcmp(argv[1], "pow") == 0){
-            test(var, a, atoi(b));
-            op_delete(var);
-        }
-        return 1;
-    }
-    else {
-        printf("Please select a valid integer\n");
-        return 0;
-    }
-    
-    // if the user type a wrong command
-    usage();
-    op_delete(var);
-    return 0;
-}
