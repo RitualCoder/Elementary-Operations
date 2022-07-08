@@ -12,10 +12,16 @@ bool test_add(op var){
         check = false;
         return check;
     }
-    var->result = addition(var, "4", "4");
+    char *num1 = "4";
+    char *num2 = "4";
+    addition(var, num1, num2);
     if (strcmp(var->result,"8") != 0){
         check = false;
     }
+    /* addition(var, "0", "0");
+    if (strcmp(var->result,"0") != 0){
+        check = false;
+    } */
     return check;
 }
 
@@ -25,7 +31,9 @@ bool test_sub(op var){
         check = false;
         return check;
     }
-    var->result = substraction(var, "4", "4");
+    char *num1 = "4";
+    char *num2 = "4";
+    substraction(var, num1, num2);
     if (strcmp(var->result,"0") != 0){
         check = false;
     }
@@ -39,7 +47,7 @@ bool test_mul(op var){
         check = false;
         return check;
     }
-    var->result = multiplication(var, "4", "4", true);
+    multiplication(var, "4", "4", true);
     if (strcmp(var->result,"16") != 0){
         check = false;
     }
@@ -52,7 +60,7 @@ bool test_div(op var){
         check = false;
         return check;
     }
-    var->result = division(var, "4", 2);
+    division(var, "4", 2);
     if (strcmp(var->result,"2") != 0){
         check = false;
     }
@@ -65,9 +73,8 @@ bool test_pow(op var){
         check = false;
         return check;
     }
-    var->result = pow_(var, "4", 0);
-    // printf("%s\n", var->result);
-    if (strcmp(var->result,"1") != 0){
+    pow_(var, "4", 2);
+    if (strcmp(var->result,"16") != 0){
         check = false;
     }
     return check;
@@ -92,10 +99,10 @@ int main(int argc, char** argv){
 
     // Exécute la fonction que l'utilisateur a spécifié en argument
     if (strcmp("add", argv[1]) == 0) {
-        ok = test_mul(var);
+        ok = test_add(var);
     }
     else if (strcmp("sub", argv[1]) == 0) {
-        ok = test_mul(var);
+        ok = test_sub(var);
     }
     else if (strcmp("mul", argv[1]) == 0) {
         ok = test_mul(var);

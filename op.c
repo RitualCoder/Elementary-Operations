@@ -28,35 +28,44 @@ char *addition(op var, char *a, char *b){
     int len2 = strlen(var->num2);
     if (len1 > len2){
         inverser(var->num2);
-        for (int i = strlen(var->num2); i < strlen(var->num1); i++){
+        for (int i = len2; i < len1; i++){
             strcat(var->num2, "0");
         }
         inverser(var->num2);
     }
-    if (len1 < len2) {
+    else {
         inverser(var->num1);
         for (int i = len1; i < len2; i++){
             strcat(var->num1, "0");
         }
         inverser(var->num1);
     }
-    int result, retenue = 0;
-    for (int i = strlen(var->num1) - 1; i >= 0; i--){
+
+    int result, count = 0, i, retenue = 0;
+    memset(var->result, '0', strlen(var->num1) + strlen(var->num2));
+    for (i = strlen(var->num1) - 1; i >= 0; i--){
         result = (var->num1[i] - '0') + (var->num2[i] - '0') + retenue;
         if (result >= 10){
             retenue = result/10;
             var->result[i] = (result % 10 + '0');
+            count++;
         }
         else{
             var->result[i] = (result + '0');
             retenue = 0;
+            count++;
         }
         if (i == 0 && retenue != 0){
             inverser(var->result);
             var->result[strlen(var->result)] = (retenue + '0');
             inverser(var->result);
+            count++;
         }
     }
+
+    // Put '\0' at the end of the string
+    var->result[count] = '\0';
+    
     if (strlen(var->result) > 8){
         scientific_form(5, var);
         printf("%s + %s = %s\n", a, b, var->sresult);
@@ -73,7 +82,6 @@ char * substraction(op var, char* a, char* b){
 
     int len1 = strlen(var->num1);
     int len2 = strlen(var->num2);
-
 
     // check si la valeur de num2 > num1
     int superior = 0;
@@ -116,19 +124,24 @@ char * substraction(op var, char* a, char* b){
     }
 
     // Opération
-    int retenu = 0, result;
+    int retenu = 0, count = 0, result;
     for (int i = strlen(var->num1) - 1; i >= 0; i--){
         if (var->num1[i] - '0' >= var->num2[i] - '0' + retenu){
             result = (var->num1[i] - '0') - (var->num2[i] - '0' + retenu);
             retenu = 0;
             var->result[i] = (result + '0');
+            count++;
         }
         else {
             result = (var->num1[i] - '0' + 10) - (var->num2[i] - '0' + retenu);
             retenu = 1;
             var->result[i] = (result + '0');
+            count++;
         }
     }
+
+    // Put '\0' at the end of the string
+    var->result[count] = '\0';
 
     // Traitement des "0" en trop
     inverser(var->result);
@@ -177,6 +190,8 @@ char * multiplication(op var, char *a, char *b, bool auxi){
     }
     inverser(var->result);
 
+    var->result[string_length(var->result)] = '\0';
+
     if (!auxi){
         printf("%s * %s = %s\n",a , b, var->result);
     }
@@ -210,19 +225,15 @@ char * division(op var, char *dividend, long divisor){
     }
     inverser(var->result);
 
-    // var->result[j] = '\0';
     printf("%s / %ld = %s\n", dividend, divisor, var->result);
     return var->result;
 }
 
 char *pow_(op var, char *a, long pow1){
-    strcpy(var->num1, a);
-    // printf("%s\n", var->num1);
     long temp = pow1;
     var->result[0] = '1';
-    strcat(var->result, "\0");
     while (temp != 0){
-        var->result = multiplication(var, var->num1, var->result, true);
+        var->result = multiplication(var, a, var->result, true);
         if (strlen(var->result) > 100){
             printf("too big\n");
             return "ok";
