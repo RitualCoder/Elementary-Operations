@@ -57,7 +57,13 @@ char *addition(op var, char *a, char *b){
             inverser(var->result);
         }
     }
-    printf("%s + %s = %s\n", a, b, var->result);
+    if (strlen(var->result) > 8){
+        scientific_form(5, var);
+        printf("%s + %s = %s\n", a, b, var->sresult);
+    }
+    else {
+        printf("%s + %s = %s\n", a, b, var->result);
+    }
     return var->result;
 }
 
@@ -193,6 +199,7 @@ char * division(op var, char *dividend, long divisor){
         }
         i++;
     }
+    var->result[j] = '\0';
 
     // Traitement des "0" en trop
     inverser(var->result);
@@ -203,7 +210,7 @@ char * division(op var, char *dividend, long divisor){
     }
     inverser(var->result);
 
-    var->result[j] = '\0';
+    // var->result[j] = '\0';
     printf("%s / %ld = %s\n", dividend, divisor, var->result);
     return var->result;
 }
@@ -213,6 +220,7 @@ char *pow_(op var, char *a, long pow1){
     // printf("%s\n", var->num1);
     long temp = pow1;
     var->result[0] = '1';
+    strcat(var->result, "\0");
     while (temp != 0){
         var->result = multiplication(var, var->num1, var->result, true);
         if (strlen(var->result) > 100){

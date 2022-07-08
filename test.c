@@ -6,7 +6,45 @@
 #include "aux_func/aux.h"
 #include "op_struct/private.h"
 
+bool test_add(op var){
+    bool check = true;
+    if (var->result == NULL){
+        check = false;
+        return check;
+    }
+    var->result = addition(var, "4", "4");
+    if (strcmp(var->result,"8") != 0){
+        check = false;
+    }
+    return check;
+}
 
+bool test_sub(op var){
+    bool check = true;
+    if (var->result == NULL){
+        check = false;
+        return check;
+    }
+    var->result = substraction(var, "4", "4");
+    if (strcmp(var->result,"0") != 0){
+        check = false;
+    }
+    return check;
+}
+
+
+bool test_mul(op var){
+    bool check = true;
+    if (var->result == NULL){
+        check = false;
+        return check;
+    }
+    var->result = multiplication(var, "4", "4", true);
+    if (strcmp(var->result,"16") != 0){
+        check = false;
+    }
+    return check;
+}
 
 bool test_div(op var){
     bool check = true;
@@ -21,14 +59,31 @@ bool test_div(op var){
     return check;
 }
 
+bool test_pow(op var){
+    bool check = true;
+    if (var->result == NULL){
+        check = false;
+        return check;
+    }
+    var->result = pow_(var, "4", 0);
+    // printf("%s\n", var->result);
+    if (strcmp(var->result,"1") != 0){
+        check = false;
+    }
+    return check;
+}
+
 void usage(void){
     fprintf(stderr, "Usage : test_operator <testname>\n");
     fprintf(stderr,
-            "division\n");
+            "add\n"
+            "sub\n"
+            "mul\n"
+            "div\n");
 }
 
 int main(int argc, char** argv){
-    if (argc != 1) {
+    if (argc != 2) {
         usage();
         return EXIT_FAILURE;
     }
@@ -36,9 +91,22 @@ int main(int argc, char** argv){
     bool ok = false;
 
     // Exécute la fonction que l'utilisateur a spécifié en argument
-    //if (strcmp("division", argv[1]) == 0) {
-    ok = test_div(var);
-    // }
+    if (strcmp("add", argv[1]) == 0) {
+        ok = test_mul(var);
+    }
+    else if (strcmp("sub", argv[1]) == 0) {
+        ok = test_mul(var);
+    }
+    else if (strcmp("mul", argv[1]) == 0) {
+        ok = test_mul(var);
+    }
+    else if (strcmp("div", argv[1]) == 0) {
+        ok = test_div(var);
+    }
+    else if (strcmp("pow", argv[1]) == 0) {
+        ok = test_pow(var);
+    }
+
     op_delete(var);
     if (ok) {
         fprintf(stderr, "Test [%s] finished : SUCCESS\n", argv[1]);

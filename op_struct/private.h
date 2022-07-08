@@ -18,6 +18,7 @@ struct op_s {
     char* num1;
     char* num2;
     char* result;
+    char* sresult;
 };
 
 typedef struct op_s op_s;

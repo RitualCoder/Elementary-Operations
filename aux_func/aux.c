@@ -20,19 +20,30 @@
 #include "../op_struct/private.h"
 #include "../op.h"
 
-char *inverser(char *str){
-    if (!str || ! *str)
-        return str;
-    int i = strlen(str) - 1, j = 0;
-    char ch;
-    while (i > j){
-        ch = str[i];
-        str[i] = str[j];
-        str[j] = ch;
-        i--;
-        j++;
+void inverser(char *s){
+    int length, c;
+    char *begin, *end, temp;
+    length = string_length(s);
+    begin = s;
+    end = s;
+    for (c = 0; c < length - 1; c++){
+        end++;
     }
-    return str;
+    for (c = 0; c < length/2; c++) {        
+        temp   = *end;
+        *end   = *begin;
+        *begin = temp;
+        begin++;
+        end--;
+    }
+}
+ 
+int string_length(char *str){
+    int count = 0;
+    while( *(str + count) != '\0' ){
+        count++;
+    }
+    return count;
 }
 
 bool remove_char(char *s, int pos){
@@ -48,28 +59,29 @@ bool remove_char(char *s, int pos){
 
 void op_delete(op operation){
     assert(operation);
-    if (operation->num1 != NULL){
-        free(operation->num1);
-    }
-    if (operation->num2 != NULL){
-        free(operation->num2);
-    }
-    if (operation->result != NULL){
-        free(operation->result);
-    }
-    if (operation != NULL){
-        free(operation);
-    }
+    assert(operation->num1);
+    assert(operation->num2);
+    assert(operation->result);
+    free(operation->num1);
+    free(operation->num2);
+    free(operation->result);
+    free(operation->sresult);
+    free(operation);
     return;
 }
 
 op init_(int length){
     assert(length);
-    op operation = (op)malloc(sizeof(op));
+    op operation = malloc(sizeof(struct op_s));
     assert (operation);
     operation->num1 = malloc(length*sizeof(char));
+    assert(operation->num1);
     operation->num2 = malloc(length*sizeof(char));
+    assert(operation->num2);
     operation->result = malloc(length*sizeof(char));
+    assert(operation->result);
+    operation->sresult = malloc(length*sizeof(char));
+    assert(operation->sresult);
     return operation;
 }
 
@@ -83,9 +95,40 @@ bool check_str(char *str){
     }
     for (int i = 0; i < len; i++){
         if (str[i] < 48 || str[i]> 57){
-            printf("Not an integer\n");
+            printf("'%s' is not an integer\n", str);
             return false;
         }
     }
     return true;
+}
+
+char *int_string(int x, char *str){
+    long long temp = x;
+    int i = 0;
+    while (temp != 0){
+        str[i] = (temp%10 + '0');
+        temp = temp/10;
+        i++;
+    }
+    str[i+1] = '\0';
+    inverser(str);
+    return str;
+}
+
+void scientific_form(int pos, op var){
+    int i;
+    char array[100];
+    long long count = 0, j = 0;
+    for (i = 0; i < pos; i++, j++){
+        if (i == 1){
+            var->sresult[i] = ',';
+            i++;
+        }
+        var->sresult[i] = var->result[j];
+    }
+    count = strlen(var->result) - 1;
+    var->sresult[i+1] = '\0';
+    strcat(var->sresult, " * 10^");
+    strcat(var->sresult, int_string(count, array));
+    strcat(var->sresult, "\0");
 }

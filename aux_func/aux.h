@@ -17,10 +17,13 @@
 
 /**
  * @brief Reverse a string
- * @param str the string number
+ * @param s the string number
  * @return the reverse string
  **/
-char *inverser(char *str);
+void inverser(char *s);
+
+int string_length(char *pointer);
+
 
 /**
  * @brief Remove a character in a string at a position
@@ -51,5 +54,15 @@ op init_(int length);
  **/
 bool check_str(char *str);
 
+char *int_string(int x, char *str);
+
+
+/**
+ * @brief Cut a string at a given position
+ * @param pos The given position
+ * @param var The op struct to modificate
+ * @return A boolean
+ **/
+void scientific_form(int pos, op var);
 
 #endif

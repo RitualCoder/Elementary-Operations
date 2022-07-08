@@ -24,8 +24,8 @@ int main(int argc, char *argv[]){
         return 0;
     }
 
-    char a[50];
-    char b[50];
+    char a[100];
+    char b[100];
     op var = init_(100);
     printf("Veuillez saisir le premier nombre : ");
     scanf("%s", a);
