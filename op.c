@@ -227,7 +227,7 @@ char * division(op var, char *dividend, long divisor){
 char *pow_(op var, char *a, long pow1){
     long temp = pow1;
     var->result[0] = '1';
-    // var->result[1] = '\0';
+    var->result[1] = '\0';
     while (temp != 0){
         var->result = multiplication(var, a, var->result, true);
         if (strlen(var->result) > 100){
