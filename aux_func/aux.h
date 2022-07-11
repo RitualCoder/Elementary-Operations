@@ -75,10 +75,11 @@ char *int_string(int x, char *str);
 
 /**
  * @brief Transform a string number in a scientific form
- * @param pos The position of the comma
+ * @param a The first string
+ * @param b The second string
  * @param var The op struct to modificate
  * @return Void
  **/
-void scientific_form(int pos, op var);
+void print_result(op var, char *a, char *b);
 
 #endif

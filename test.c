@@ -14,6 +14,7 @@ bool test_add(op var){
     }
     addition(var, "4", "4");
     if (strcmp(var->result,"8") != 0){
+        printf("ok");
         check = false;
     }
     addition(var, "0", "0");
@@ -22,6 +23,7 @@ bool test_add(op var){
     }
     addition(var, "294209540245", "2785275427555508475");
     if (strcmp(var->result,"2785275721765048720") != 0){
+        printf("ok");
         check = false;
     }
     return check;

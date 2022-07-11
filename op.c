@@ -66,13 +66,7 @@ char *addition(op var, char *a, char *b){
     // Put '\0' at the end of the string
     var->result[count] = '\0';
     
-    if (strlen(var->result) > 8){
-        scientific_form(5, var);
-        printf("%s + %s = %s\n", a, b, var->sresult);
-    }
-    else {
-        printf("%s + %s = %s\n", a, b, var->result);
-    }
+    print_result(var, a, b);
     return var->result;
 }
 
@@ -159,7 +153,7 @@ char * substraction(op var, char* a, char* b){
         inverser(var->result);
     }
 
-    printf("%s - %s = %s\n", a, b, var->result);
+    print_result(var, a, b);
     return var->result;
 }
 
@@ -181,7 +175,7 @@ char * multiplication(op var, char *a, char *b, bool auxi){
             var->result[i + j + 1] = ((var->result[i + j + 1] + mul - '0') % 10) + '0';
         }
     }
-    
+
     // Traitement des "0" en trop
     inverser(var->result);
     i = strlen(var->result) - 1;
@@ -194,7 +188,7 @@ char * multiplication(op var, char *a, char *b, bool auxi){
     var->result[string_length(var->result)] = '\0';
 
     if (!auxi){
-        printf("%s * %s = %s\n",a , b, var->result);
+        print_result(var, a, b);
     }
     return var->result;
 }
@@ -233,7 +227,7 @@ char * division(op var, char *dividend, long divisor){
 char *pow_(op var, char *a, long pow1){
     long temp = pow1;
     var->result[0] = '1';
-    var->result[1] = '\0';
+    // var->result[1] = '\0';
     while (temp != 0){
         var->result = multiplication(var, a, var->result, true);
         if (strlen(var->result) > 100){

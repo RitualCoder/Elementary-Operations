@@ -125,20 +125,15 @@ char *int_string(int x, char *str){
     return str;
 }
 
-void scientific_form(int pos, op var){
-    int i;
-    char array[100];
-    long long count = 0, j = 0;
-    for (i = 0; i < pos; i++, j++){
-        if (i == 1){
-            var->sresult[i] = ',';
-            i++;
-        }
-        var->sresult[i] = var->result[j];
+void print_result(op var, char *a, char *b){
+    if (strlen(var->result) > 8){
+        char temp_s[100];
+        strcpy(temp_s, var->result);
+        temp_s[10] = '\0';
+        float temp = atol(temp_s);
+        printf("%s + %s = %.2e\n", a, b, temp);
     }
-    count = strlen(var->result) - 1;
-    var->sresult[i+1] = '\0';
-    strcat(var->sresult, " * 10^");
-    strcat(var->sresult, int_string(count, array));
-    strcat(var->sresult, "\0");
+    else {
+        printf("%s + %s = %s\n", a, b, var->result);
+    }
 }
