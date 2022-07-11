@@ -22,14 +22,25 @@
  **/
 void inverser(char *s);
 
-int string_length(char *pointer);
+/**
+ * @brief Reverse an integer
+ * @param a The integer
+ * @return The reverse integer
+ **/
+int inverser_numb(int a);
 
+/**
+ * @brief Give the length of a string
+ * @param s The string
+ * @return The length
+ **/
+int string_length(char *str);
 
 /**
  * @brief Remove a character in a string at a position
- * @param s the string
- * @param pos the character position
- * @return the new string
+ * @param s The string
+ * @param pos The character position
+ * @return The new string
  **/
 bool remove_char(char *s, int pos);
 
@@ -54,14 +65,19 @@ op init_(int length);
  **/
 bool check_str(char *str);
 
+/**
+ * @brief Transform an int to string
+ * @param x The integer
+ * @param str The string
+ * @return The string
+ **/
 char *int_string(int x, char *str);
 
-
 /**
- * @brief Cut a string at a given position
- * @param pos The given position
+ * @brief Transform a string number in a scientific form
+ * @param pos The position of the comma
  * @param var The op struct to modificate
- * @return A boolean
+ * @return Void
  **/
 void scientific_form(int pos, op var);
 

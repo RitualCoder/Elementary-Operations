@@ -12,16 +12,18 @@ bool test_add(op var){
         check = false;
         return check;
     }
-    char *num1 = "4";
-    char *num2 = "4";
-    addition(var, num1, num2);
+    addition(var, "4", "4");
     if (strcmp(var->result,"8") != 0){
         check = false;
     }
-    /* addition(var, "0", "0");
+    addition(var, "0", "0");
     if (strcmp(var->result,"0") != 0){
         check = false;
-    } */
+    }
+    addition(var, "294209540245", "2785275427555508475");
+    if (strcmp(var->result,"2785275721765048720") != 0){
+        check = false;
+    }
     return check;
 }
 
@@ -31,10 +33,16 @@ bool test_sub(op var){
         check = false;
         return check;
     }
-    char *num1 = "4";
-    char *num2 = "4";
-    substraction(var, num1, num2);
+    substraction(var, "4", "4");
     if (strcmp(var->result,"0") != 0){
+        check = false;
+    }
+    substraction(var, "3", "4");
+    if (strcmp(var->result,"-1") != 0){
+        check = false;
+    }
+    substraction(var, "0", "4786");
+    if (strcmp(var->result,"-4786") != 0){
         check = false;
     }
     return check;
@@ -51,6 +59,14 @@ bool test_mul(op var){
     if (strcmp(var->result,"16") != 0){
         check = false;
     }
+    multiplication(var, "0", "0", true);
+    if (strcmp(var->result,"0") != 0){
+        check = false;
+    }
+    multiplication(var, "28745845", "237254728541540", true);
+    if (strcmp(var->result,"6820087652172184901300") != 0){
+        check = false;
+    }
     return check;
 }
 
@@ -64,6 +80,14 @@ bool test_div(op var){
     if (strcmp(var->result,"2") != 0){
         check = false;
     }
+    division(var, "0", 1);
+    if (strcmp(var->result,"0") != 0){
+        check = false;
+    }
+    division(var, "99", 2);
+    if (strcmp(var->result,"49") != 0){
+        check = false;
+    }
     return check;
 }
 
@@ -74,9 +98,19 @@ bool test_pow(op var){
         return check;
     }
     pow_(var, "4", 2);
-    if (strcmp(var->result,"16") != 0){
+    if (strcmp(var->result,"16") != 0 && !check_str(var->result)){
         check = false;
     }
+    pow_(var, "0", 0);
+    if (strcmp(var->result,"1") != 0 && !check_str(var->result)){
+        check = false;
+    }
+    pow_(var, "42", 5);
+    if (strcmp(var->result,"130691232") != 0 && !check_str(var->result)){
+        check = false;
+    }
+
+
     return check;
 }
 

@@ -37,6 +37,16 @@ void inverser(char *s){
         end--;
     }
 }
+
+int inverser_numb(int a){
+    int NbrInverse = 0, nbr;
+    while (nbr != 0){
+        NbrInverse = NbrInverse * 10;
+        NbrInverse = NbrInverse + nbr%10;
+        nbr = nbr/10;
+    }
+    return NbrInverse;
+}
  
 int string_length(char *str){
     int count = 0;

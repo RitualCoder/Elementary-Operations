@@ -163,24 +163,25 @@ char * substraction(op var, char* a, char* b){
     return var->result;
 }
 
-
-
 char * multiplication(op var, char *a, char *b, bool auxi){
     strcpy(var->num1, a);
     strcpy(var->num2, b);
 
+    int len1 = strlen(var->num1);
+    int len2 = strlen(var->num2);
+
     // Operation
     int mul, i, j;
-    memset(var->result, '0', strlen(var->num1) + strlen(var->num2));
-    var->result[strlen(var->num1) + strlen(var->num2)] = 0;
-    for (i = strlen(var->num1) - 1; i >= 0; i--){
-        for (j = strlen(var->num2) - 1; j >= 0; j--){
+    memset(var->result, '0', len1 + len2);
+    var->result[len1 + len2] = 0;
+    for (i = len1 - 1; i >= 0; i--){
+        for (j = len2 - 1; j >= 0; j--){
             mul = (var->num1[i] - '0') * (var->num2[j] - '0');
             var->result[i + j] += ((var->result[i + j + 1] + mul - '0') / 10);
             var->result[i + j + 1] = ((var->result[i + j + 1] + mul - '0') % 10) + '0';
         }
     }
-
+    
     // Traitement des "0" en trop
     inverser(var->result);
     i = strlen(var->result) - 1;
@@ -232,6 +233,7 @@ char * division(op var, char *dividend, long divisor){
 char *pow_(op var, char *a, long pow1){
     long temp = pow1;
     var->result[0] = '1';
+    var->result[1] = '\0';
     while (temp != 0){
         var->result = multiplication(var, a, var->result, true);
         if (strlen(var->result) > 100){
