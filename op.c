@@ -66,7 +66,7 @@ char *addition(op var, char *a, char *b){
     // Put '\0' at the end of the string
     var->result[count] = '\0';
     
-    print_result(var, a, b);
+    print_result(var, a, b, '+');
     return var->result;
 }
 
@@ -153,7 +153,7 @@ char * substraction(op var, char* a, char* b){
         inverser(var->result);
     }
 
-    print_result(var, a, b);
+    print_result(var, a, b, '-');
     return var->result;
 }
 
@@ -188,7 +188,7 @@ char * multiplication(op var, char *a, char *b, bool auxi){
     var->result[string_length(var->result)] = '\0';
 
     if (!auxi){
-        print_result(var, a, b);
+        print_result(var, a, b, '*');
     }
     return var->result;
 }
@@ -224,20 +224,38 @@ char * division(op var, char *dividend, long divisor){
     return var->result;
 }
 
+/* int count(op var){
+    char array[500];
+    strcpy(array, var->result);
+    int i = 0;
+    int count = 0;
+    while (array[i] != '\0'){
+        count = count + (array[i] - '0');
+        i++;
+    }
+    printf("%d\n", count);
+    return count;
+} */
+
 char *pow_(op var, char *a, long pow1){
     long temp = pow1;
     var->result[0] = '1';
     var->result[1] = '\0';
     while (temp != 0){
         var->result = multiplication(var, a, var->result, true);
-        if (strlen(var->result) > 100){
+        if (strlen(var->result) > 1000){
             printf("too big\n");
             return "ok";
         }
         temp--;
     }
-    printf("%s^%ld = %s\n", a, pow1, var->result);
+    temp = pow1;
+    char array[100];
+    int_to_char(temp, array);
+    print_result(var, a, array, '^');
     return var->result;
 }
+
+
 
 

@@ -26,7 +26,7 @@ int main(int argc, char *argv[]){
 
     char a[100];
     char b[100];
-    op var = init_(100);
+    op var = init_(1000);
     printf("Veuillez saisir le premier nombre : ");
     scanf("%s", a);
     printf("Veuillez saisir le deuxième nombre : ");

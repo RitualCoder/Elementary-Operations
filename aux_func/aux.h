@@ -15,6 +15,14 @@
 #include <stdbool.h>
 #include "../op.h"
 
+
+/**
+ * @brief Return a string with an integer
+ * @param num the long to transform in string
+ * @return The string
+ **/
+char *int_to_char(long num, char *array);
+
 /**
  * @brief Reverse a string
  * @param s the string number
@@ -78,8 +86,9 @@ char *int_string(int x, char *str);
  * @param a The first string
  * @param b The second string
  * @param var The op struct to modificate
+ * @param operator The char operator
  * @return Void
  **/
-void print_result(op var, char *a, char *b);
+void print_result(op var, char *a, char *b, char operator);
 
 #endif

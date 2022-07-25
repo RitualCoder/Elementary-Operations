@@ -38,6 +38,20 @@ void inverser(char *s){
     }
 }
 
+char *int_to_char(long num, char *array){
+    long temp = num;
+    int i = 0;
+    while (temp > 0){
+        array[i] = (temp%10) + '0';
+        temp = temp/10;
+        i++;
+    }
+    array[i] = '\0';
+    inverser(array);
+    return array;
+}
+
+
 int inverser_numb(int a){
     int NbrInverse = 0, nbr;
     while (nbr != 0){
@@ -125,15 +139,15 @@ char *int_string(int x, char *str){
     return str;
 }
 
-void print_result(op var, char *a, char *b){
+void print_result(op var, char *a, char *b, char operator){
+    char temp_s[100];
+    strcpy(temp_s, var->result);
+    temp_s[10] = '\0';
+    float temp = atol(temp_s);
     if (strlen(var->result) > 8){
-        char temp_s[100];
-        strcpy(temp_s, var->result);
-        temp_s[10] = '\0';
-        float temp = atol(temp_s);
-        printf("%s + %s = %.2e\n", a, b, temp);
+        printf("%s %c %s = %.2e\n", a, operator, b, temp);
     }
     else {
-        printf("%s + %s = %s\n", a, b, var->result);
+        printf("%s %c %s = %s\n", a, operator, b, var->result);
     }
 }

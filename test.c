@@ -23,7 +23,6 @@ bool test_add(op var){
     }
     addition(var, "294209540245", "2785275427555508475");
     if (strcmp(var->result,"2785275721765048720") != 0){
-        printf("ok");
         check = false;
     }
     return check;
