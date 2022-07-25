@@ -1,0 +1,38 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/enzo/travail/c/operation_function/library/aux.h
+string.h
+-
+stdbool.h
+-
+op.h
+/home/enzo/travail/c/operation_function/library/op.h
+
+/home/enzo/travail/c/operation_function/library/op.h
+stdbool.h
+-
+
+/home/enzo/travail/c/operation_function/library/private.h
+string.h
+-
+
+/home/enzo/travail/c/operation_function/test.c
+stdio.h
+-
+stdbool.h
+-
+stdlib.h
+-
+library/op.h
+/home/enzo/travail/c/operation_function/library/op.h
+library/aux.h
+/home/enzo/travail/c/operation_function/library/aux.h
+library/private.h
+/home/enzo/travail/c/operation_function/library/private.h
+

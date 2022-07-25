@@ -1,0 +1,1 @@
+/usr/bin/cc -std=c99 -Wall -pthread -L SDL2  -rdynamic CMakeFiles/sdl.dir/sdl.c.o  -o sdl 

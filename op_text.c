@@ -4,9 +4,9 @@
 #include <string.h>
 #include <stdbool.h>
 
-#include "op.h"
-#include "aux_func/aux.h"
-#include "op_struct/private.h"
+#include "library/op.h"
+#include "library/aux.h"
+#include "library/private.h"
 
 void usage(){
     fprintf(stderr,"Usage : ./operation <operator>\n\n");

@@ -2,9 +2,9 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
-#include "op.h"
-#include "aux_func/aux.h"
-#include "op_struct/private.h"
+#include "library/op.h"
+#include "library/aux.h"
+#include "library/private.h"
 
 bool test_add(op var){
     bool check = true;

@@ -1,0 +1,1 @@
+/usr/bin/cc -std=c99 -Wall -pthread -L SDL2  -rdynamic CMakeFiles/test_op.dir/test.c.o  -o test_op  libop.a 
