@@ -220,7 +220,10 @@ char * division(op var, char *dividend, long divisor){
     }
     inverser(var->result);
 
-    printf("%s / %ld = %s\n", dividend, divisor, var->result);
+    char array[100];
+    int_to_char(divisor, array);
+    print_result(var, dividend, array, '/');
+    // printf("%s / %ld = %s\n", dividend, divisor, var->result);
     return var->result;
 }
 
