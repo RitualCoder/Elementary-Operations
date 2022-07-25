@@ -4,6 +4,11 @@
 #include <stdbool.h>
 #include <stdio.h>
 
+#include "SDL_Menu.h"
+
 int main(int argc, char* argv[]){
-    return 1;
+    SDL_Window* pWindow = NULL;
+    SDL_Renderer* pRenderer = NULL;
+    SDL_end(pWindow, pRenderer);
+    return EXIT_SUCCESS;
 }

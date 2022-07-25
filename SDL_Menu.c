@@ -9,6 +9,8 @@
 #include "library/aux.h"
 #include "library/op.h"
 
-int main(int argc, char* argv[]){
-    return 1;
+void SDL_end(SDL_Renderer* pRenderer, SDL_Window* pWindow) {
+    SDL_DestroyRenderer(pRenderer);
+    SDL_DestroyWindow(pWindow);
+    SDL_Quit();
 }
