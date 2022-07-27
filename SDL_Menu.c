@@ -6,8 +6,12 @@
 #include <strings.h>
 #include <sys/time.h>
 
+#include "SDL_Menu.h"
 #include "library/aux.h"
 #include "library/op.h"
+#include "SDL_lib.h"
+#include "env.h"
+
 
 bool init(SDL_Renderer** pRenderer, SDL_Window** pWindow){
     // event init
@@ -25,18 +29,6 @@ bool init(SDL_Renderer** pRenderer, SDL_Window** pWindow){
     return run;
 }
 
-
-void printDebug(SDL_Renderer* pRenderer, SDL_Window* pWindow) {
-    int videoDriverIndex = SDL_GetNumVideoDrivers();
-    SDL_Log("Video driver: %d -> %s\n", videoDriverIndex, SDL_GetVideoDriver(videoDriverIndex));
-    SDL_RendererInfo info;
-    if (SDL_GetRendererInfo(pRenderer, &info) >= 0) {
-        SDL_Log("Renderer name: %s\n", info.name);
-        int width, height;
-        SDL_GetWindowSize(pWindow, &width, &height);
-        SDL_Log("Window size %dx%d\n", width, height);
-    }
-}
 
 void SDL_end(SDL_Renderer* pRenderer, SDL_Window* pWindow) {
     SDL_DestroyRenderer(pRenderer);

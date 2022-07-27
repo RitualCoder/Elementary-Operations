@@ -1,5 +1,5 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/sdl.dir/sdl.c.o"
+  "CMakeFiles/sdl.dir/main.c.o"
   "sdl"
   "sdl.pdb"
 )

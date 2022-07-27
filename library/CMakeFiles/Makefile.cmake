@@ -48,12 +48,14 @@ set(CMAKE_MAKEFILE_PRODUCTS
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/operation.dir/DependInfo.cmake"
+  "CMakeFiles/SDL.dir/DependInfo.cmake"
   "CMakeFiles/NightlyMemCheck.dir/DependInfo.cmake"
   "CMakeFiles/NightlyTest.dir/DependInfo.cmake"
   "CMakeFiles/ContinuousConfigure.dir/DependInfo.cmake"
   "CMakeFiles/ContinuousBuild.dir/DependInfo.cmake"
   "CMakeFiles/NightlyConfigure.dir/DependInfo.cmake"
   "CMakeFiles/NightlyMemoryCheck.dir/DependInfo.cmake"
+  "CMakeFiles/SDL_LIB.dir/DependInfo.cmake"
   "CMakeFiles/ExperimentalTest.dir/DependInfo.cmake"
   "CMakeFiles/ContinuousUpdate.dir/DependInfo.cmake"
   "CMakeFiles/NightlyUpdate.dir/DependInfo.cmake"

@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "/home/enzo/travail/c/operation_function/sdl.c" "/home/enzo/travail/c/operation_function/library/CMakeFiles/sdl.dir/sdl.c.o"
+  "/home/enzo/travail/c/operation_function/main.c" "/home/enzo/travail/c/operation_function/library/CMakeFiles/sdl.dir/main.c.o"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 
@@ -15,6 +15,9 @@ set(CMAKE_C_TARGET_INCLUDE_PATH
 
 # Targets to which this target links.
 set(CMAKE_TARGET_LINKED_INFO_FILES
+  "/home/enzo/travail/c/operation_function/library/CMakeFiles/op.dir/DependInfo.cmake"
+  "/home/enzo/travail/c/operation_function/library/CMakeFiles/SDL.dir/DependInfo.cmake"
+  "/home/enzo/travail/c/operation_function/library/CMakeFiles/SDL_LIB.dir/DependInfo.cmake"
   )
 
 # Fortran module output directory.

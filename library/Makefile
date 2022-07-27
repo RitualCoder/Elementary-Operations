@@ -135,6 +135,19 @@ operation/fast:
 .PHONY : operation/fast
 
 #=============================================================================
+# Target rules for targets named SDL
+
+# Build rule for target.
+SDL: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 SDL
+.PHONY : SDL
+
+# fast build rule for target.
+SDL/fast:
+	$(MAKE) -f CMakeFiles/SDL.dir/build.make CMakeFiles/SDL.dir/build
+.PHONY : SDL/fast
+
+#=============================================================================
 # Target rules for targets named NightlyMemCheck
 
 # Build rule for target.
@@ -211,6 +224,19 @@ NightlyMemoryCheck: cmake_check_build_system
 NightlyMemoryCheck/fast:
 	$(MAKE) -f CMakeFiles/NightlyMemoryCheck.dir/build.make CMakeFiles/NightlyMemoryCheck.dir/build
 .PHONY : NightlyMemoryCheck/fast
+
+#=============================================================================
+# Target rules for targets named SDL_LIB
+
+# Build rule for target.
+SDL_LIB: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 SDL_LIB
+.PHONY : SDL_LIB
+
+# fast build rule for target.
+SDL_LIB/fast:
+	$(MAKE) -f CMakeFiles/SDL_LIB.dir/build.make CMakeFiles/SDL_LIB.dir/build
+.PHONY : SDL_LIB/fast
 
 #=============================================================================
 # Target rules for targets named ExperimentalTest
@@ -537,6 +563,60 @@ op/fast:
 	$(MAKE) -f CMakeFiles/op.dir/build.make CMakeFiles/op.dir/build
 .PHONY : op/fast
 
+SDL_Menu.o: SDL_Menu.c.o
+
+.PHONY : SDL_Menu.o
+
+# target to build an object file
+SDL_Menu.c.o:
+	$(MAKE) -f CMakeFiles/SDL.dir/build.make CMakeFiles/SDL.dir/SDL_Menu.c.o
+.PHONY : SDL_Menu.c.o
+
+SDL_Menu.i: SDL_Menu.c.i
+
+.PHONY : SDL_Menu.i
+
+# target to preprocess a source file
+SDL_Menu.c.i:
+	$(MAKE) -f CMakeFiles/SDL.dir/build.make CMakeFiles/SDL.dir/SDL_Menu.c.i
+.PHONY : SDL_Menu.c.i
+
+SDL_Menu.s: SDL_Menu.c.s
+
+.PHONY : SDL_Menu.s
+
+# target to generate assembly for a file
+SDL_Menu.c.s:
+	$(MAKE) -f CMakeFiles/SDL.dir/build.make CMakeFiles/SDL.dir/SDL_Menu.c.s
+.PHONY : SDL_Menu.c.s
+
+SDL_lib.o: SDL_lib.c.o
+
+.PHONY : SDL_lib.o
+
+# target to build an object file
+SDL_lib.c.o:
+	$(MAKE) -f CMakeFiles/SDL_LIB.dir/build.make CMakeFiles/SDL_LIB.dir/SDL_lib.c.o
+.PHONY : SDL_lib.c.o
+
+SDL_lib.i: SDL_lib.c.i
+
+.PHONY : SDL_lib.i
+
+# target to preprocess a source file
+SDL_lib.c.i:
+	$(MAKE) -f CMakeFiles/SDL_LIB.dir/build.make CMakeFiles/SDL_LIB.dir/SDL_lib.c.i
+.PHONY : SDL_lib.c.i
+
+SDL_lib.s: SDL_lib.c.s
+
+.PHONY : SDL_lib.s
+
+# target to generate assembly for a file
+SDL_lib.c.s:
+	$(MAKE) -f CMakeFiles/SDL_LIB.dir/build.make CMakeFiles/SDL_LIB.dir/SDL_lib.c.s
+.PHONY : SDL_lib.c.s
+
 aux.o: aux.c.o
 
 .PHONY : aux.o
@@ -563,6 +643,33 @@ aux.s: aux.c.s
 aux.c.s:
 	$(MAKE) -f CMakeFiles/op.dir/build.make CMakeFiles/op.dir/aux.c.s
 .PHONY : aux.c.s
+
+main.o: main.c.o
+
+.PHONY : main.o
+
+# target to build an object file
+main.c.o:
+	$(MAKE) -f CMakeFiles/sdl.dir/build.make CMakeFiles/sdl.dir/main.c.o
+.PHONY : main.c.o
+
+main.i: main.c.i
+
+.PHONY : main.i
+
+# target to preprocess a source file
+main.c.i:
+	$(MAKE) -f CMakeFiles/sdl.dir/build.make CMakeFiles/sdl.dir/main.c.i
+.PHONY : main.c.i
+
+main.s: main.c.s
+
+.PHONY : main.s
+
+# target to generate assembly for a file
+main.c.s:
+	$(MAKE) -f CMakeFiles/sdl.dir/build.make CMakeFiles/sdl.dir/main.c.s
+.PHONY : main.c.s
 
 op.o: op.c.o
 
@@ -618,33 +725,6 @@ op_text.c.s:
 	$(MAKE) -f CMakeFiles/operation.dir/build.make CMakeFiles/operation.dir/op_text.c.s
 .PHONY : op_text.c.s
 
-sdl.o: sdl.c.o
-
-.PHONY : sdl.o
-
-# target to build an object file
-sdl.c.o:
-	$(MAKE) -f CMakeFiles/sdl.dir/build.make CMakeFiles/sdl.dir/sdl.c.o
-.PHONY : sdl.c.o
-
-sdl.i: sdl.c.i
-
-.PHONY : sdl.i
-
-# target to preprocess a source file
-sdl.c.i:
-	$(MAKE) -f CMakeFiles/sdl.dir/build.make CMakeFiles/sdl.dir/sdl.c.i
-.PHONY : sdl.c.i
-
-sdl.s: sdl.c.s
-
-.PHONY : sdl.s
-
-# target to generate assembly for a file
-sdl.c.s:
-	$(MAKE) -f CMakeFiles/sdl.dir/build.make CMakeFiles/sdl.dir/sdl.c.s
-.PHONY : sdl.c.s
-
 test.o: test.c.o
 
 .PHONY : test.o
@@ -681,6 +761,7 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... test"
 	@echo "... operation"
+	@echo "... SDL"
 	@echo "... edit_cache"
 	@echo "... NightlyMemCheck"
 	@echo "... NightlyTest"
@@ -688,6 +769,7 @@ help:
 	@echo "... ContinuousBuild"
 	@echo "... NightlyConfigure"
 	@echo "... NightlyMemoryCheck"
+	@echo "... SDL_LIB"
 	@echo "... ExperimentalTest"
 	@echo "... ContinuousUpdate"
 	@echo "... NightlyUpdate"
@@ -713,18 +795,24 @@ help:
 	@echo "... ContinuousTest"
 	@echo "... ContinuousSubmit"
 	@echo "... op"
+	@echo "... SDL_Menu.o"
+	@echo "... SDL_Menu.i"
+	@echo "... SDL_Menu.s"
+	@echo "... SDL_lib.o"
+	@echo "... SDL_lib.i"
+	@echo "... SDL_lib.s"
 	@echo "... aux.o"
 	@echo "... aux.i"
 	@echo "... aux.s"
+	@echo "... main.o"
+	@echo "... main.i"
+	@echo "... main.s"
 	@echo "... op.o"
 	@echo "... op.i"
 	@echo "... op.s"
 	@echo "... op_text.o"
 	@echo "... op_text.i"
 	@echo "... op_text.s"
-	@echo "... sdl.o"
-	@echo "... sdl.i"
-	@echo "... sdl.s"
 	@echo "... test.o"
 	@echo "... test.i"
 	@echo "... test.s"

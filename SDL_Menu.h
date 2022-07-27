@@ -12,8 +12,13 @@
 #ifndef __SDLMENU_H__
 #define __SDLMENU_H__
 
+
 #include <SDL2/SDL.h>
 #include <stdbool.h>
+
+#include "env.h"
+
+typedef struct Env_s* env;
 
 /**
  * @brief Init base of SDL2 and game environement
@@ -23,14 +28,6 @@
  * @return False problem append
  */
 bool init(SDL_Renderer** pRenderer, SDL_Window** pWindow);
-
-/**
- * @brief Print an SDL2 error
- * @param pRenderer An SDL2 renderer
- * @param pWindow An SDL2 window
- */
-void printDebug(SDL_Renderer* pRenderer, SDL_Window* pWindow);
-
 
 /**
  * @brief Destroy pRenderer and pWindow

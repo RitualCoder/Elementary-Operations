@@ -57,28 +57,31 @@ include CMakeFiles/sdl.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/sdl.dir/flags.make
 
-CMakeFiles/sdl.dir/sdl.c.o: CMakeFiles/sdl.dir/flags.make
-CMakeFiles/sdl.dir/sdl.c.o: ../sdl.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/enzo/travail/c/operation_function/library/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/sdl.dir/sdl.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/sdl.dir/sdl.c.o   -c /home/enzo/travail/c/operation_function/sdl.c
+CMakeFiles/sdl.dir/main.c.o: CMakeFiles/sdl.dir/flags.make
+CMakeFiles/sdl.dir/main.c.o: ../main.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/enzo/travail/c/operation_function/library/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/sdl.dir/main.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/sdl.dir/main.c.o   -c /home/enzo/travail/c/operation_function/main.c
 
-CMakeFiles/sdl.dir/sdl.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/sdl.dir/sdl.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/enzo/travail/c/operation_function/sdl.c > CMakeFiles/sdl.dir/sdl.c.i
+CMakeFiles/sdl.dir/main.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/sdl.dir/main.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/enzo/travail/c/operation_function/main.c > CMakeFiles/sdl.dir/main.c.i
 
-CMakeFiles/sdl.dir/sdl.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/sdl.dir/sdl.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/enzo/travail/c/operation_function/sdl.c -o CMakeFiles/sdl.dir/sdl.c.s
+CMakeFiles/sdl.dir/main.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/sdl.dir/main.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/enzo/travail/c/operation_function/main.c -o CMakeFiles/sdl.dir/main.c.s
 
 # Object files for target sdl
 sdl_OBJECTS = \
-"CMakeFiles/sdl.dir/sdl.c.o"
+"CMakeFiles/sdl.dir/main.c.o"
 
 # External object files for target sdl
 sdl_EXTERNAL_OBJECTS =
 
-sdl: CMakeFiles/sdl.dir/sdl.c.o
+sdl: CMakeFiles/sdl.dir/main.c.o
 sdl: CMakeFiles/sdl.dir/build.make
+sdl: libop.a
+sdl: libSDL.a
+sdl: libSDL_LIB.a
 sdl: CMakeFiles/sdl.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/enzo/travail/c/operation_function/library/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking C executable sdl"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/sdl.dir/link.txt --verbose=$(VERBOSE)

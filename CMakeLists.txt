@@ -23,14 +23,13 @@ set(CMAKE_C_FLAGS "-std=c99 -Wall -pthread -L SDL2")
 set(CMAKE_C_FLAGS_DEBUG "-g --coverage -D DEBUG")    # use CMake option: -DCMAKE_BUILD_TYPE=DEBUG
 set(CMAKE_C_FLAGS_RELEASE "-O3 -DNDEBUG")   # use CMake option: -DCMAKE_BUILD_TYPE=RELEASE
 
-add_library(op library/op.c library/aux.c)
-add_library(SDL_LIB SDL_lib.c)
-add_library(SDL SDL_Menu.c)
+add_library(op library/op.c library/op.h library/aux.c library/aux.h)
+add_library(SDL_LIB SDL_lib.c SDL_lib.h SDL_Menu.c SDL_Menu.h)
 
 add_executable(operation op_text.c)
 add_executable(sdl main.c)
 add_executable(test_op test.c)
 
-target_link_libraries(operation op m)
-target_link_libraries(sdl op SDL SDL_LIB ${SDL2_ALL_LIBS})
+target_link_libraries(operation op)
+target_link_libraries(sdl op SDL_LIB ${SDL2_ALL_LIBS})
 target_link_libraries(test_op op)

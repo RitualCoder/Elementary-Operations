@@ -54,6 +54,8 @@ CMAKE_BINARY_DIR = /home/enzo/travail/c/operation_function/library
 
 # The main recursive "all" target.
 all: CMakeFiles/operation.dir/all
+all: CMakeFiles/SDL.dir/all
+all: CMakeFiles/SDL_LIB.dir/all
 all: CMakeFiles/test_op.dir/all
 all: CMakeFiles/sdl.dir/all
 all: CMakeFiles/op.dir/all
@@ -67,12 +69,14 @@ preinstall:
 
 # The main recursive "clean" target.
 clean: CMakeFiles/operation.dir/clean
+clean: CMakeFiles/SDL.dir/clean
 clean: CMakeFiles/NightlyMemCheck.dir/clean
 clean: CMakeFiles/NightlyTest.dir/clean
 clean: CMakeFiles/ContinuousConfigure.dir/clean
 clean: CMakeFiles/ContinuousBuild.dir/clean
 clean: CMakeFiles/NightlyConfigure.dir/clean
 clean: CMakeFiles/NightlyMemoryCheck.dir/clean
+clean: CMakeFiles/SDL_LIB.dir/clean
 clean: CMakeFiles/ExperimentalTest.dir/clean
 clean: CMakeFiles/ContinuousUpdate.dir/clean
 clean: CMakeFiles/NightlyUpdate.dir/clean
@@ -108,7 +112,7 @@ clean: CMakeFiles/op.dir/clean
 CMakeFiles/operation.dir/all: CMakeFiles/op.dir/all
 	$(MAKE) -f CMakeFiles/operation.dir/build.make CMakeFiles/operation.dir/depend
 	$(MAKE) -f CMakeFiles/operation.dir/build.make CMakeFiles/operation.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/enzo/travail/c/operation_function/library/CMakeFiles --progress-num=4,5 "Built target operation"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/enzo/travail/c/operation_function/library/CMakeFiles --progress-num=8,9 "Built target operation"
 .PHONY : CMakeFiles/operation.dir/all
 
 # Build rule for subdir invocation for target.
@@ -127,6 +131,33 @@ operation: CMakeFiles/operation.dir/rule
 CMakeFiles/operation.dir/clean:
 	$(MAKE) -f CMakeFiles/operation.dir/build.make CMakeFiles/operation.dir/clean
 .PHONY : CMakeFiles/operation.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/SDL.dir
+
+# All Build rule for target.
+CMakeFiles/SDL.dir/all:
+	$(MAKE) -f CMakeFiles/SDL.dir/build.make CMakeFiles/SDL.dir/depend
+	$(MAKE) -f CMakeFiles/SDL.dir/build.make CMakeFiles/SDL.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/enzo/travail/c/operation_function/library/CMakeFiles --progress-num=1,2 "Built target SDL"
+.PHONY : CMakeFiles/SDL.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/SDL.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/enzo/travail/c/operation_function/library/CMakeFiles 2
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/SDL.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/enzo/travail/c/operation_function/library/CMakeFiles 0
+.PHONY : CMakeFiles/SDL.dir/rule
+
+# Convenience name for target.
+SDL: CMakeFiles/SDL.dir/rule
+
+.PHONY : SDL
+
+# clean rule for target.
+CMakeFiles/SDL.dir/clean:
+	$(MAKE) -f CMakeFiles/SDL.dir/build.make CMakeFiles/SDL.dir/clean
+.PHONY : CMakeFiles/SDL.dir/clean
 
 #=============================================================================
 # Target rules for target CMakeFiles/NightlyMemCheck.dir
@@ -289,6 +320,33 @@ NightlyMemoryCheck: CMakeFiles/NightlyMemoryCheck.dir/rule
 CMakeFiles/NightlyMemoryCheck.dir/clean:
 	$(MAKE) -f CMakeFiles/NightlyMemoryCheck.dir/build.make CMakeFiles/NightlyMemoryCheck.dir/clean
 .PHONY : CMakeFiles/NightlyMemoryCheck.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/SDL_LIB.dir
+
+# All Build rule for target.
+CMakeFiles/SDL_LIB.dir/all:
+	$(MAKE) -f CMakeFiles/SDL_LIB.dir/build.make CMakeFiles/SDL_LIB.dir/depend
+	$(MAKE) -f CMakeFiles/SDL_LIB.dir/build.make CMakeFiles/SDL_LIB.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/enzo/travail/c/operation_function/library/CMakeFiles --progress-num=3,4 "Built target SDL_LIB"
+.PHONY : CMakeFiles/SDL_LIB.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/SDL_LIB.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/enzo/travail/c/operation_function/library/CMakeFiles 2
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/SDL_LIB.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/enzo/travail/c/operation_function/library/CMakeFiles 0
+.PHONY : CMakeFiles/SDL_LIB.dir/rule
+
+# Convenience name for target.
+SDL_LIB: CMakeFiles/SDL_LIB.dir/rule
+
+.PHONY : SDL_LIB
+
+# clean rule for target.
+CMakeFiles/SDL_LIB.dir/clean:
+	$(MAKE) -f CMakeFiles/SDL_LIB.dir/build.make CMakeFiles/SDL_LIB.dir/clean
+.PHONY : CMakeFiles/SDL_LIB.dir/clean
 
 #=============================================================================
 # Target rules for target CMakeFiles/ExperimentalTest.dir
@@ -486,7 +544,7 @@ CMakeFiles/ContinuousCoverage.dir/clean:
 CMakeFiles/test_op.dir/all: CMakeFiles/op.dir/all
 	$(MAKE) -f CMakeFiles/test_op.dir/build.make CMakeFiles/test_op.dir/depend
 	$(MAKE) -f CMakeFiles/test_op.dir/build.make CMakeFiles/test_op.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/enzo/travail/c/operation_function/library/CMakeFiles --progress-num=8,9 "Built target test_op"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/enzo/travail/c/operation_function/library/CMakeFiles --progress-num=12,13 "Built target test_op"
 .PHONY : CMakeFiles/test_op.dir/all
 
 # Build rule for subdir invocation for target.
@@ -834,15 +892,17 @@ CMakeFiles/ContinuousStart.dir/clean:
 # Target rules for target CMakeFiles/sdl.dir
 
 # All Build rule for target.
-CMakeFiles/sdl.dir/all:
+CMakeFiles/sdl.dir/all: CMakeFiles/SDL_LIB.dir/all
+CMakeFiles/sdl.dir/all: CMakeFiles/SDL.dir/all
+CMakeFiles/sdl.dir/all: CMakeFiles/op.dir/all
 	$(MAKE) -f CMakeFiles/sdl.dir/build.make CMakeFiles/sdl.dir/depend
 	$(MAKE) -f CMakeFiles/sdl.dir/build.make CMakeFiles/sdl.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/enzo/travail/c/operation_function/library/CMakeFiles --progress-num=6,7 "Built target sdl"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/enzo/travail/c/operation_function/library/CMakeFiles --progress-num=10,11 "Built target sdl"
 .PHONY : CMakeFiles/sdl.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/sdl.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/enzo/travail/c/operation_function/library/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/enzo/travail/c/operation_function/library/CMakeFiles 9
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/sdl.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/enzo/travail/c/operation_function/library/CMakeFiles 0
 .PHONY : CMakeFiles/sdl.dir/rule
@@ -945,7 +1005,7 @@ CMakeFiles/ContinuousSubmit.dir/clean:
 CMakeFiles/op.dir/all:
 	$(MAKE) -f CMakeFiles/op.dir/build.make CMakeFiles/op.dir/depend
 	$(MAKE) -f CMakeFiles/op.dir/build.make CMakeFiles/op.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/enzo/travail/c/operation_function/library/CMakeFiles --progress-num=1,2,3 "Built target op"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/enzo/travail/c/operation_function/library/CMakeFiles --progress-num=5,6,7 "Built target op"
 .PHONY : CMakeFiles/op.dir/all
 
 # Build rule for subdir invocation for target.
