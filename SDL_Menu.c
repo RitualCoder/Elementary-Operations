@@ -13,12 +13,12 @@
 #include "env.h"
 
 
-bool init(SDL_Renderer** pRenderer, SDL_Window** pWindow){
+bool init(SDL_Renderer** pRenderer, SDL_Window** pWindow, env genv){
     // event init
     bool run = true;
 
     // window init
-    SDL_initAndSetName(pRenderer, pWindow);
+    SDL_initAndSetName(pRenderer, pWindow, genv);
 
     // mouse
     SDL_PumpEvents();

@@ -33,3 +33,9 @@ add_executable(test_op test.c)
 target_link_libraries(operation op)
 target_link_libraries(sdl op SDL_LIB ${SDL2_ALL_LIBS})
 target_link_libraries(test_op op)
+
+#on copie les font
+add_subdirectory(font)
+
+#on copie les images
+add_subdirectory(img)

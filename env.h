@@ -21,6 +21,9 @@ struct Env_s {
     int nb_rows, nb_cols;
     int sprite_size;
 
+    SDL_Surface* icon;
+
+    TTF_Font* pFont;
 };
 
 typedef struct Env_s* Env_s;

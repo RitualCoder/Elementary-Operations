@@ -19,19 +19,24 @@
 
 #include "env.h"
 
-#define SPACE 20
-#define SPRITE_SIZE 64
 #define WINDOW_HEIGHT 800
 #define WINDOW_WIDTH 600
+
+#define TOUCH_SIZE 80
+#define SPACE 20
+#define WIDTH_BIG_CELL 360
 
 #define WHITE \
     { 255, 255, 255, 255 }
 #define BLACK \
     { 0, 0, 0, 255 }
 
+#define ERROR(STR, ...) do { fprintf(stderr, STR, ##__VA_ARGS__); exit(EXIT_FAILURE); } while(0)
+
+
 typedef struct Env_s* env;
 
-void SDL_initAndSetName(SDL_Renderer** pRenderer, SDL_Window** pWindow);
+void SDL_initAndSetName(SDL_Renderer** pRenderer, SDL_Window** pWindow, env genv);
 
 SDL_Texture** make_all_text_texture(SDL_Renderer* pRenderer, char* text[], int nbtext, env genv, SDL_Color textColor);
 
@@ -44,7 +49,16 @@ bool process(SDL_Window *win, SDL_Renderer *ren, SDL_Event *e);
  */
 void printDebug(SDL_Renderer* pRenderer, SDL_Window* pWindow);
 
+void draw_screen(SDL_Renderer* pRenderer, SDL_Window* pWindow);
+
+void draw_touch_calc(SDL_Renderer* pRenderer, SDL_Window* pWindow, SDL_Texture* buttons_tex[], env genv, unsigned int numb_touch);
+
 env init_calc_environment();
+
+void clean_texture_tab(SDL_Texture* tab[], int nbItem);
+
+void draw_menu(SDL_Renderer* pRenderer, SDL_Window* pWindow, SDL_Texture* items[], int nbItem);
+
 
 void quit(env genv);
 

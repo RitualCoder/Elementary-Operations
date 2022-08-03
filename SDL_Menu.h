@@ -27,7 +27,7 @@ typedef struct Env_s* env;
  * @return True All good
  * @return False problem append
  */
-bool init(SDL_Renderer** pRenderer, SDL_Window** pWindow);
+bool init(SDL_Renderer** pRenderer, SDL_Window** pWindow, env genv);
 
 /**
  * @brief Destroy pRenderer and pWindow
