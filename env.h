@@ -19,8 +19,7 @@ struct Env_s {
     int mouse_x, mouse_y;
     int case_x, case_y;
     int nb_rows, nb_cols;
-    int sprite_size;
-
+    
     SDL_Surface* icon;
 
     TTF_Font* pFont;

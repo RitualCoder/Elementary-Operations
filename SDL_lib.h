@@ -40,18 +40,15 @@ void SDL_initAndSetName(SDL_Renderer** pRenderer, SDL_Window** pWindow, env genv
 
 SDL_Texture** make_all_text_texture(SDL_Renderer* pRenderer, char* text[], int nbtext, env genv, SDL_Color textColor);
 
-bool process(SDL_Window *win, SDL_Renderer *ren, SDL_Event *e);
+bool process(SDL_Window *win, SDL_Renderer *ren, SDL_Event *e, int *FPS);
 
-/**
- * @brief Print an SDL2 error
- * @param pRenderer An SDL2 renderer
- * @param pWindow An SDL2 window
- */
 void printDebug(SDL_Renderer* pRenderer, SDL_Window* pWindow);
+
+void draw_fps(SDL_Renderer* pRenderer, SDL_Window* pWindow, env genv, char *elapsed);
 
 void draw_screen(SDL_Renderer* pRenderer, SDL_Window* pWindow);
 
-void draw_touch_calc(SDL_Renderer* pRenderer, SDL_Window* pWindow, SDL_Texture* buttons_tex[], env genv, unsigned int numb_touch);
+void draw_touch_calc(SDL_Renderer* pRenderer, SDL_Window* pWindow, SDL_Texture* s_buttons_tex[], env genv);
 
 env init_calc_environment();
 

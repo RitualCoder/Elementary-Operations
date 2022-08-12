@@ -38,9 +38,9 @@ void SDL_initAndSetName(SDL_Renderer** pRenderer, SDL_Window** pWindow, env genv
         printf("[Error] TTF_Init: %s\n", TTF_GetError());
         exit(2);
     }
-    genv->pFont = TTF_OpenFont("./font/04B_20__.ttf", 1000);
+    genv->pFont = TTF_OpenFont("./font/pixel.ttf", 100);
     if (!genv->pFont){
-        ERROR("TTF_OpenFont: %s\n", "04B_20__.ttf");
+        ERROR("TTF_OpenFont: %s\n", "Minecraft.ttf");
     } 
 
     *pRenderer = SDL_CreateRenderer(*pWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
@@ -49,6 +49,7 @@ void SDL_initAndSetName(SDL_Renderer** pRenderer, SDL_Window** pWindow, env genv
     }
     SDL_SetWindowMinimumSize(*pWindow, 400, 300);
 }
+
 
 void draw_screen(SDL_Renderer* pRenderer, SDL_Window* pWindow){
     SDL_Rect rect;
@@ -68,47 +69,42 @@ void draw_screen(SDL_Renderer* pRenderer, SDL_Window* pWindow){
     SDL_RenderDrawRect(pRenderer, &rect);
 }
 
-void draw_touch_calc(SDL_Renderer* pRenderer, SDL_Window* pWindow, SDL_Texture* buttons_tex[], env genv, unsigned int numb_touch) {
-    SDL_Rect rect;
-    rect.x = 80;
-    rect.y = 400;
-    rect.w = TOUCH_SIZE;
-    rect.h = TOUCH_SIZE;
+void draw_touch_calc(SDL_Renderer* pRenderer, SDL_Window* pWindow, SDL_Texture* buttons_tex[], env genv) {
+    SDL_Rect button;
+    SDL_Rect rect_char;
 
+    button.x = 80;
+    button.y = 300;
+    button.w = TOUCH_SIZE;
+    button.h = TOUCH_SIZE;
+
+    rect_char.x = button.x + 10;
+    rect_char.y = button.y + 10;
+    rect_char.w = button.w - 20;
+    rect_char.h = button.h - 20;
+
+    // DRAW SMALL BUTTONS
     int count = 0; // index tab
     for (int i = 0; i < genv->nb_rows; i++){
         for (int y = 0; y < genv->nb_cols; y++){
             if (y == genv->nb_cols - 1){ // if last column
 
                 // Draw white rectangle
-                SDL_RenderFillRect(pRenderer, &rect); 
+                SDL_RenderFillRect(pRenderer, &button); 
 
                 // Draw text button
-                rect.x = rect.x + 10;
-                rect.y = rect.y + 10;
-                rect.w = rect.w - 20;
-                rect.h = rect.h - 20;
-                SDL_RenderCopy(pRenderer, buttons_tex[count],NULL, &rect);
-                rect.x = rect.x - 10;
-                rect.y = rect.y - 10;
-                rect.w = rect.w + 20;
-                rect.h = rect.h + 20;
-
-                rect.y = rect.y + TOUCH_SIZE + SPACE - 10;
-                rect.x = 80;
+                rect_char.x = button.x + 10;
+                rect_char.y = button.y + 10;
+                SDL_RenderCopy(pRenderer, buttons_tex[count],NULL, &rect_char);
+                button.y = button.y + TOUCH_SIZE + SPACE - 10;
+                button.x = 80;
             }
             else {
-                SDL_RenderFillRect(pRenderer, &rect);
-                rect.x = rect.x + 10;
-                rect.y = rect.y + 10;
-                rect.w = rect.w - 20;
-                rect.h = rect.h - 20;
-                SDL_RenderCopy(pRenderer, buttons_tex[count],NULL, &rect);
-                rect.x = rect.x - 10;
-                rect.y = rect.y - 10;
-                rect.w = rect.w + 20;
-                rect.h = rect.h + 20;
-                rect.x = rect.x + TOUCH_SIZE + SPACE + 20;
+                SDL_RenderFillRect(pRenderer, &button);
+                rect_char.x = button.x + 10;
+                rect_char.y = button.y + 10;
+                SDL_RenderCopy(pRenderer, buttons_tex[count],NULL, &rect_char);
+                button.x = button.x + TOUCH_SIZE + SPACE + 20;
             }
             count ++;
         }
@@ -118,15 +114,11 @@ void draw_touch_calc(SDL_Renderer* pRenderer, SDL_Window* pWindow, SDL_Texture* 
 env init_calc_environment() {
     env genv = malloc(sizeof(struct Env_s));
     genv->nb_cols = 4;
-    genv->nb_rows = 3;
+    genv->nb_rows = 5;
     genv->window_height = WINDOW_HEIGHT;
     genv->windows_width = WINDOW_WIDTH;
     return genv;
 }
-
-//SDL_Texture** make_all_text_texture(SDL_Renderer* pRenderer, char* text[], int nbtext, env genv, SDL_Color textColor){
-
-
 
 
 void printDebug(SDL_Renderer* pRenderer, SDL_Window* pWindow) {
@@ -168,6 +160,23 @@ void clean_texture_tab(SDL_Texture* tab[], int nbItem) {
     }
     free(tab);
 }
+
+void draw_fps(SDL_Renderer* pRenderer, SDL_Window* pWindow, env genv, char *elapsed) {
+    SDL_Color green = {0, 255, 0};
+    SDL_Rect rect;
+
+    rect.x = 530;
+    rect.y = 750;
+    rect.h = 40;
+    rect.w = 60;
+    SDL_SetRenderDrawColor(pRenderer, 0, 255, 0, 255);
+    SDL_Texture* texture = text_at_texture(pRenderer, elapsed, genv->pFont, green);
+
+    SDL_RenderCopy(pRenderer, texture, NULL, &rect);
+
+    SDL_SetRenderDrawColor(pRenderer, 0, 0, 0, 255);
+}
+
 
 void draw_menu(SDL_Renderer* pRenderer, SDL_Window* pWindow, SDL_Texture* items[], int nbItem){
     int w, h;
@@ -212,9 +221,18 @@ void draw_menu(SDL_Renderer* pRenderer, SDL_Window* pWindow, SDL_Texture* items[
 
 
 
-bool process(SDL_Window *win, SDL_Renderer *ren, SDL_Event *e) {
+bool process(SDL_Window *win, SDL_Renderer *ren, SDL_Event *e, int *FPS) {
     if (e->type == SDL_QUIT) {
         return false;
+    }
+
+    else if (e->type == SDL_KEYDOWN) {
+        if (e->key.keysym.sym == SDLK_f && *FPS == 0) {
+            *FPS = 1;
+        }
+        else if (e->key.keysym.sym == SDLK_f && *FPS == 1) {
+            *FPS = 0;
+        }
     }
     return true;
 }
