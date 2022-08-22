@@ -126,6 +126,48 @@ bool check_str(char *str){
     return true;
 }
 
+bool is_operator(char str){
+    if (str == 43 || str == 42 || str == 43 || str == 43 || str == 94){
+        return true;
+    }
+    return false;
+}
+
+bool check_str2(char *str){
+    int len = strlen(str);
+    int i = 0;
+    int left_par = 0;
+    int right_par = 0;
+    while (i < len){
+        if (is_operator(str[i])){
+
+            // Check if there is two operator in a row
+            if (is_operator(str[i + 1])) {
+                return false;
+            }
+
+            if (str[i + 1] < 48 || str[i + 1] > 57 || str[i + 1] != 40){
+                return false;
+            }
+        }
+
+        // Check if there is "()"
+        if (str[i] == 40){
+            left_par ++;
+            if (str[i + 1] == 41){
+                return false;
+            }
+        }
+        if (str[i] == 41){
+            right_par++;
+        }
+    }
+    if (left_par != right_par){
+        return false;
+    }
+    return true;
+}
+
 char *int_string(int x, char *str){
     long long temp = x;
     int i = 0;

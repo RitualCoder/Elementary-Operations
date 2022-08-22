@@ -73,6 +73,10 @@ op init_(int length);
  **/
 bool check_str(char *str);
 
+bool is_operator(char str);
+
+bool check_str2(char *str);
+
 /**
  * @brief Transform an int to string
  * @param x The integer
