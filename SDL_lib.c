@@ -221,17 +221,17 @@ void draw_menu(SDL_Renderer* pRenderer, SDL_Window* pWindow, SDL_Texture* items[
 
 
 
-bool process(SDL_Window *win, SDL_Renderer *ren, SDL_Event *e, int *FPS) {
+bool process(SDL_Window *win, SDL_Renderer *ren, SDL_Event *e, bool *FPS) {
     if (e->type == SDL_QUIT) {
         return false;
     }
 
     else if (e->type == SDL_KEYDOWN) {
         if (e->key.keysym.sym == SDLK_f && *FPS == 0) {
-            *FPS = 1;
+            *FPS = true;
         }
         else if (e->key.keysym.sym == SDLK_f && *FPS == 1) {
-            *FPS = 0;
+            *FPS = false;
         }
     }
     return true;

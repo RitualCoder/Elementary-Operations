@@ -20,7 +20,7 @@ int main(int argc, char* argv[]){
 
     // double fps = 0;
     bool main_loop_run = true;
-    int FPS = 0;
+    bool show_fps = false;
 
     init(&pRenderer, &pWindow, genv);
 
@@ -41,7 +41,7 @@ int main(int argc, char* argv[]){
 	    
         while (SDL_PollEvent(&e)) {
             // process events
-            main_loop_run = process(pWindow, pRenderer, &e, &FPS);
+            main_loop_run = process(pWindow, pRenderer, &e, &show_fps);
 
             if (!main_loop_run){
                 break;
@@ -58,13 +58,12 @@ int main(int argc, char* argv[]){
         // FPS
         Uint64 end = SDL_GetPerformanceCounter();
         char elapsed[8];
+        
         int fps = 1/((end - start) / (float)SDL_GetPerformanceFrequency());
         int_to_char(fps, elapsed);
-        if (FPS == 1){
+        if (show_fps){
             draw_fps(pRenderer, pWindow, genv, elapsed);
         }
-        // SDL_Log("FPS = %s", elapsed);
-
 
         SDL_RenderPresent(pRenderer);
         SDL_Delay(100);

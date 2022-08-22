@@ -40,7 +40,7 @@ void SDL_initAndSetName(SDL_Renderer** pRenderer, SDL_Window** pWindow, env genv
 
 SDL_Texture** make_all_text_texture(SDL_Renderer* pRenderer, char* text[], int nbtext, env genv, SDL_Color textColor);
 
-bool process(SDL_Window *win, SDL_Renderer *ren, SDL_Event *e, int *FPS);
+bool process(SDL_Window *win, SDL_Renderer *ren, SDL_Event *e, bool *FPS);
 
 void printDebug(SDL_Renderer* pRenderer, SDL_Window* pWindow);
 
