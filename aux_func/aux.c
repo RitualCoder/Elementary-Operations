@@ -82,7 +82,7 @@ bool remove_char(char *s, int pos){
     return true;
 }
 
-void delete_string(op var, uint str_len1, uint str_len2){
+void delete_string(op var, uint str_len1, uint str_len2, uint str_len3){
     for (int i = 0; i < str_len1; i++){
         remove_char(var->num1, 0);
     }
@@ -254,7 +254,7 @@ void char_calculation(op var){
             if (var->str[i] == 94){
                 j = i;
                 // copy first numb in op->num1
-                while (j > 0 &&  !is_operator(var->str[j-1])){
+                while (j > 0 && !is_operator(var->str[j - 1])){
                     j--;
                     var->num1[countnum1] = var->str[j];
                     countnum1++;
@@ -263,7 +263,7 @@ void char_calculation(op var){
                 j = i;
 
                 // copy second numb in op->num2
-                while(j < len && !is_operator(var->str[j - 1])){
+                while(j < len && !is_operator(var->str[j + 1])){
                     j++;
                     var->num2[countnum2] = var->str[j];
                     countnum2++;
@@ -272,24 +272,27 @@ void char_calculation(op var){
                 pow_(var);
                 remove_char(var->str, i);
                 delete_char_after_operation(var, i - countnum1, countnum1 + countnum2);
-                var->str[len - countnum1 - countnum2 - 1] = '\0';
-                printf("After delete %s\n", var->str);
+                var->str[len - countnum1 - countnum2] = '\0';
+                // printf("After delete %s\n", var->str);
                 insert_char(var, i - countnum1, strlen(var->result));
                 printf("%s\n", var->str);
-                delete_string(var, countnum1, countnum2);
+                delete_string(var, countnum1, countnum2, strlen(var->result));
                 countnum1 = 0;
                 countnum2 = 0;
+                i=0;
             }
             i++;
         }
         i=0;
+        
         while (var->str[i] != '\0'){ 
-
-            // FOR MULTIPLICATION
-            if (var->str[i] == 42){
+            
+            // FOR MULTIPLICATION and DIVISION
+            if (var->str[i] == 42 || var->str[i] == 47){
+                len = strlen(var->str);
                 j = i;
                 // copy first numb in op->num1
-                while (j > 0 &&  !is_operator(var->str[j-1])){
+                while (j > 0 && !is_operator(var->str[j - 1])){
                     j--;
                     var->num1[countnum1] = var->str[j];
                     countnum1++;
@@ -298,22 +301,86 @@ void char_calculation(op var){
                 j = i;
 
                 // copy second numb in op->num2
-                while(j < len && !is_operator(var->str[j - 1])){
+                while(j < len && !is_operator(var->str[j + 1])){
                     j++;
                     var->num2[countnum2] = var->str[j];
                     countnum2++;
                 }
-                // printf("%s (%d) et %s (%d)\n", var->num1, countnum1, var->num2, countnum2);
-                multiplication(var, var->num1, var->num2, true);
+                
+                // Put the result in var->result
+                if (var->str[i] == 42) {
+                    multiplication(var, var->num1, var->num2, true);
+                }
+                else {
+                    division(var, var->num1, atoi(var->num2));
+                }
+
+                // Delete the operator between num1 and num2
                 remove_char(var->str, i);
+
+                // Delete the operation to do in the string
                 delete_char_after_operation(var, i - countnum1, countnum1 + countnum2);
-                var->str[len - countnum1 - countnum2 - 1] = '\0';
-                printf("After delete %s\n", var->str);
+
+                // Terminate correctly the string
+                var->str[len - countnum1 - countnum2] = '\0';
+                // printf("After delete %s\n", var->str);
                 insert_char(var, i - countnum1, strlen(var->result));
                 printf("%s\n", var->str);
-                delete_string(var, countnum1, countnum2);
+                delete_string(var, countnum1, countnum2, strlen(var->result));
+                // printf("test2 : %s\n", var->str);
                 countnum1 = 0;
                 countnum2 = 0;
+                i=0;
+            }
+            i++;
+        }
+        i = 0;
+
+        while (var->str[i] != '\0'){ 
+            
+            // FOR ADDITION and SUBASTRACTION
+            if (var->str[i] == 43 || var->str[i] == 45){
+                len = strlen(var->str);
+                j = i;
+                // copy first numb in op->num1
+                while (j > 0 && !is_operator(var->str[j - 1])){
+                    j--;
+                    var->num1[countnum1] = var->str[j];
+                    countnum1++;
+                }
+                inverser(var->num1);
+                j = i;
+
+                // copy second numb in op->num2
+                while(j < len && !is_operator(var->str[j + 1])){
+                    j++;
+                    var->num2[countnum2] = var->str[j];
+                    countnum2++;
+                }
+                
+                // Put the result in var->result
+                if (var->str[i] == 43) {
+                    addition(var);
+                }
+                else {
+                    substraction(var);
+                }
+
+                // Delete the operator between num1 and num2
+                remove_char(var->str, i);
+
+                // Delete the operation to do in the string
+                delete_char_after_operation(var, i - countnum1, countnum1 + countnum2);
+
+                // Terminate correctly the string
+                var->str[len - countnum1 - countnum2] = '\0';
+                // printf("After delete %s\n", var->str);
+                insert_char(var, i - countnum1, strlen(var->result));
+                printf("%s\n", var->str);
+                delete_string(var, countnum1, countnum2, strlen(var->result));
+                countnum1 = 0;
+                countnum2 = 0;
+                i=0;
             }
             i++;
         }

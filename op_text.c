@@ -76,9 +76,15 @@ int main(int argc, char *argv[]){
 
     else {
         printf("error syntax\n");
-    } 
+    }
 
-    // printf("%s\n", var->str);
+    // printf("%s\n", var->result);
+    /* scanf("%s", var->num1);
+    scanf("%s", var->num2);
+
+    addition(var);
+    printf("%s + %s = %s\n", var->num1, var->num2, var->result); */
+
     op_delete(var);
     return 0;
 }

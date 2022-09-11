@@ -20,31 +20,34 @@
 #include "op_struct/private.h"
 
 
-char *addition(op var, char *a, char *b){
-    strcpy(var->num1, a);
-    strcpy(var->num2, b);
+char *addition(op var){
+    char a[100];
+    char b[100];
+    strcpy(a, var->num1);
+    strcpy(b, var->num2);
 
-    int len1 = strlen(var->num1);
-    int len2 = strlen(var->num2);
+    int len1 = strlen(a);
+    int len2 = strlen(b);
     if (len1 > len2){
-        inverser(var->num2);
+        inverser(b);
         for (int i = len2; i < len1; i++){
-            strcat(var->num2, "0");
+            strcat(b, "0");
         }
-        inverser(var->num2);
+        inverser(b);
     }
     else {
-        inverser(var->num1);
+        inverser(a);
         for (int i = len1; i < len2; i++){
-            strcat(var->num1, "0");
+            strcat(a, "0");
         }
-        inverser(var->num1);
+        inverser(a);
     }
+    
 
     int result, count = 0, i, retenue = 0;
-    memset(var->result, '0', strlen(var->num1) + strlen(var->num2));
-    for (i = strlen(var->num1) - 1; i >= 0; i--){
-        result = (var->num1[i] - '0') + (var->num2[i] - '0') + retenue;
+    memset(var->result, '0', strlen(a) + strlen(b));
+    for (i = strlen(a) - 1; i >= 0; i--){
+        result = (a[i] - '0') + (b[i] - '0') + retenue;
         if (result >= 10){
             retenue = result/10;
             var->result[i] = (result % 10 + '0');
@@ -66,22 +69,24 @@ char *addition(op var, char *a, char *b){
     // Put '\0' at the end of the string
     var->result[count] = '\0';
     
-    print_result(var, a, b, '+');
+    // print_result(var, a, b, '+');
     return var->result;
 }
 
-char * substraction(op var, char* a, char* b){
-    strcpy(var->num1, a);
-    strcpy(var->num2, b);
+char * substraction(op var){
+    char a[100];
+    char b[100];
+    strcpy(a, var->num1);
+    strcpy(b, var->num2);
 
-    int len1 = strlen(var->num1);
-    int len2 = strlen(var->num2);
+    int len1 = strlen(a);
+    int len2 = strlen(b);
 
     // check si la valeur de num2 > num1
     int superior = 0;
     if (len1 <= len2){
         for (int i = len1 - 1; i >= 0; i--){
-            if (var->num1[i] - '0' < var->num2[i] - '0'){
+            if (a[i] - '0' < b[i] - '0'){
                 superior = 1;
                 break;
             }
@@ -90,44 +95,44 @@ char * substraction(op var, char* a, char* b){
     
     // Si le premier nb est inférieur à celui du deuxième :
     // Inversement des chaines de caractères
-    char* temp;
+    char temp[100];
     bool inverse = false;
     if (len1 <= len2 && superior == 1){
-        temp = var->num2;
-        var->num2 = var->num1;
-        var->num1 = temp;
+        strcpy(temp, b);
+        strcpy(b, a);
+        strcpy(a, temp);
         inverse = true;
-        len1 = strlen(var->num1);
-        len2 = strlen(var->num2);
+        len1 = strlen(a);
+        len2 = strlen(b);
     }
     
     // Comblage de "0" sur le nb possèdant le moins de chiffre
     if (len1 > len2){
-        inverser(var->num2);
-        for (int i = strlen(var->num2); i < strlen(var->num1); i++){
-            strcat(var->num2, "0");
+        inverser(b);
+        for (int i = strlen(b); i < strlen(a); i++){
+            strcat(b, "0");
         }
-        inverser(var->num2);
+        inverser(b);
     }
     if (len1 < len2) {
-        inverser(var->num1);
+        inverser(a);
         for (int i = len1; i < len2; i++){
-            strcat(var->num1, "0");
+            strcat(a, "0");
         }
-        inverser(var->num1);
+        inverser(a);
     }
 
     // Opération
     int retenu = 0, count = 0, result;
-    for (int i = strlen(var->num1) - 1; i >= 0; i--){
-        if (var->num1[i] - '0' >= var->num2[i] - '0' + retenu){
-            result = (var->num1[i] - '0') - (var->num2[i] - '0' + retenu);
+    for (int i = strlen(a) - 1; i >= 0; i--){
+        if (a[i] - '0' >= b[i] - '0' + retenu){
+            result = (a[i] - '0') - (b[i] - '0' + retenu);
             retenu = 0;
             var->result[i] = (result + '0');
             count++;
         }
         else {
-            result = (var->num1[i] - '0' + 10) - (var->num2[i] - '0' + retenu);
+            result = (a[i] - '0' + 10) - (b[i] - '0' + retenu);
             retenu = 1;
             var->result[i] = (result + '0');
             count++;
@@ -149,11 +154,11 @@ char * substraction(op var, char* a, char* b){
     // Si le resultat est négatif
     if (inverse && strcmp(var->result, "0") != 0){
         inverser(var->result);
-        strcat(var->result, "-");
+        strcat(var->result, "~");
         inverser(var->result);
     }
 
-    print_result(var, a, b, '-');
+    // print_result(var, a, b, '-');
     return var->result;
 }
 

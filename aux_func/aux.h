@@ -52,7 +52,7 @@ int string_length(char *str);
  **/
 bool remove_char(char *s, int pos);
 
-void delete_string(op var, uint str_len1, uint str_len2);
+void delete_string(op var, uint str_len1, uint str_len2, uint str_len3);
 
 
 /**
