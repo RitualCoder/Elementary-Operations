@@ -19,7 +19,7 @@ void usage(){
 
 int main(int argc, char *argv[]){
     // if there is not command
-    if (argc != 2 || strcmp(argv[1], "usage") == 0){
+    /* if (argc != 2 || strcmp(argv[1], "usage") == 0){
         usage();
         return 0;
     }
@@ -62,6 +62,23 @@ int main(int argc, char *argv[]){
     
     // if the user type a wrong command
     usage();
+    op_delete(var); */
+
+    op var = init_(1000);
+
+    printf("Veuillez saisir votre calcul :\n");
+    scanf("%s", var->str);
+
+    if (check_str(var->str)) {
+        char_calculation(var);
+        // printf("%s\n", var->result);
+    }
+
+    else {
+        printf("error syntax\n");
+    } 
+
+    // printf("%s\n", var->str);
     op_delete(var);
     return 0;
 }

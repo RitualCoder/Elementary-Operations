@@ -240,7 +240,25 @@ char * division(op var, char *dividend, long divisor){
     return count;
 } */
 
-char *pow_(op var, char *a, long pow1){
+char *pow_(op var){
+    long temp = atoi(var->num2);
+    var->result[0] = '1';
+    var->result[1] = '\0';
+    while (temp != 0){
+        var->result = multiplication(var, var->num1, var->result, true);
+        if (strlen(var->result) > 1000){
+            printf("too big\n");
+            return "ok";
+        }
+        temp--;
+    }
+    temp = atoi(var->num2);
+    // int_to_char(temp, array);
+    // print_result(var, a, array, '^');
+    return var->result;
+}
+
+/* char *pow_(op var, char *a, long pow1){
     long temp = pow1;
     var->result[0] = '1';
     var->result[1] = '\0';
@@ -257,7 +275,8 @@ char *pow_(op var, char *a, long pow1){
     int_to_char(temp, array);
     print_result(var, a, array, '^');
     return var->result;
-}
+} */
+
 
 
 

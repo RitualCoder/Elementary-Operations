@@ -64,6 +64,6 @@ char *division(op var, char* num1, long num2);
  * @param pow1 The second long integer
  * @return The pow in a string
 **/
-char *pow_(op var, char *num1, long pow1);
+char *pow_(op var);
 
 #endif
