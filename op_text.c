@@ -4,9 +4,9 @@
 #include <string.h>
 #include <stdbool.h>
 
-#include "library/op.h"
-#include "library/aux.h"
-#include "library/private.h"
+#include "op.h"
+#include "aux_func/aux.h"
+#include "op_struct/private.h"
 
 void usage(){
     fprintf(stderr,"Usage : ./operation <operator>\n\n");
@@ -19,7 +19,7 @@ void usage(){
 
 int main(int argc, char *argv[]){
     // if there is not command
-    if (argc != 2 || strcmp(argv[1], "usage") == 0){
+    /* if (argc != 2 || strcmp(argv[1], "usage") == 0){
         usage();
         return 0;
     }
@@ -62,6 +62,29 @@ int main(int argc, char *argv[]){
     
     // if the user type a wrong command
     usage();
+    op_delete(var); */
+
+    op var = init_(1000);
+
+    printf("Veuillez saisir votre calcul :\n");
+    scanf("%s", var->str);
+
+    if (check_str(var->str)) {
+        char_calculation(var);
+        // printf("%s\n", var->result);
+    }
+
+    else {
+        printf("error syntax\n");
+    }
+
+    // printf("%s\n", var->result);
+    /* scanf("%s", var->num1);
+    scanf("%s", var->num2);
+
+    addition(var);
+    printf("%s + %s = %s\n", var->num1, var->num2, var->result); */
+
     op_delete(var);
     return 0;
 }
