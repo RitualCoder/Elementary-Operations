@@ -30,7 +30,7 @@ typedef unsigned int uint;
  * @param num2 The second string number
  * @return The sum in a string
  **/
-char *addition(op var, char* num1, char* num2);
+char *addition(op var);
 
 
 /**
@@ -39,7 +39,7 @@ char *addition(op var, char* num1, char* num2);
  * @param num2 The second string number
  * @return The difference in a string
  **/
-char *substraction(op var, char* num1, char* num2);
+char *substraction(op var);
 
 /**
  * @brief Product of 2 strings numbers
@@ -64,6 +64,6 @@ char *division(op var, char* num1, long num2);
  * @param pow1 The second long integer
  * @return The pow in a string
 **/
-char *pow_(op var, char *num1, long pow1);
+char *pow_(op var);
 
 #endif
