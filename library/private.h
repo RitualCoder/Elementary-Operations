@@ -15,6 +15,7 @@
 #include <string.h>
 
 struct op_s {
+    char* str;
     char* num1;
     char* num2;
     char* result;
