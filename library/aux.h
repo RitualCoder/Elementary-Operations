@@ -13,7 +13,7 @@
 #define __AUX_H__
 #include <string.h>
 #include <stdbool.h>
-#include "op.h"
+#include "../op.h"
 
 
 /**
@@ -52,12 +52,18 @@ int string_length(char *str);
  **/
 bool remove_char(char *s, int pos);
 
+void delete_string(op var, uint str_len1, uint str_len2, uint str_len3);
+
+
 /**
  * @brief Free op struct
  * @param operation The op struct to delete
  * @return void
  **/
 void op_delete(op operation);
+
+void insert_char(op var, int pos, uint str_len);
+
 
 /**
  * @brief Initialize the new struct
@@ -72,6 +78,17 @@ op init_(int length);
  * @return A boolean
  **/
 bool check_str(char *str);
+
+bool is_operator(char str);
+
+bool check_str2(char *str);
+
+bool check_if_there_is_operator(char *str);
+
+void delete_char_after_operation(op var, uint rank, uint str_len);
+
+void char_calculation(op var);
+
 
 /**
  * @brief Transform an int to string
