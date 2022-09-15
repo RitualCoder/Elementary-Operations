@@ -17,8 +17,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#include "private.h"
-#include "op.h"
+#include "../op_struct/private.h"
+#include "../op.h"
 
 void inverser(char *s){
     int length, c;
@@ -72,20 +72,50 @@ int string_length(char *str){
 
 bool remove_char(char *s, int pos){
     int length = strlen(s);
+    int i;
     if (pos >= length){
         return false;
     } 
-    for (int i = pos; i < length; i++){
+    for (i = pos; i < length; i++){
         s[i] = s[i + 1];
     }
     return true;
 }
 
-void op_delete(op operation){
+void delete_string(op var, uint str_len1, uint str_len2, uint str_len3){
+    for (int i = 0; i < str_len1; i++){
+        remove_char(var->num1, 0);
+    }
+    for (int i = 0; i < str_len2; i++){
+        remove_char(var->num2, 0);
+    }
+}
+
+void insert_char(op var, int pos, uint str_len){
+    char temp[20];
+    int i; // index for temp
+    int j; // index for the numb to insert
+    int k = pos; // index for var->str
+    for (i = 0; i < pos; i++){
+        temp[i] = var->str[i];
+    }
+    for (j = 0; j < str_len; i++, j++){
+        temp[i] = var->result[j];
+    }
+    for (; var->str[k] != '\0'; k++){
+        temp[i] = var->str[k];
+        i++;
+    }
+    temp[i++] = '\0';
+    strcpy(var->str, temp);
+}
+
+void op_delete(op operation){ 
     assert(operation);
     assert(operation->num1);
     assert(operation->num2);
     assert(operation->result);
+    free(operation->str);
     free(operation->num1);
     free(operation->num2);
     free(operation->result);
@@ -98,6 +128,8 @@ op init_(int length){
     assert(length);
     op operation = malloc(sizeof(struct op_s));
     assert (operation);
+    operation->str = malloc(length*sizeof(char));
+    assert(operation->str);
     operation->num1 = malloc(length*sizeof(char));
     assert(operation->num1);
     operation->num2 = malloc(length*sizeof(char));
@@ -109,7 +141,7 @@ op init_(int length){
     return operation;
 }
 
-bool check_str(char *str){
+bool check_str2(char *str){
     int len = strlen(str);
     if (len > 1){
         if (str[0] == 48){
@@ -124,6 +156,235 @@ bool check_str(char *str){
         }
     }
     return true;
+}
+
+bool is_operator(char str){
+    if (str == 42 || str == 43 || str == 45 || str == 47 || str == 94){
+        return true;
+    }
+    return false;
+}
+
+bool check_str(char *str){
+    int len = strlen(str);
+    int left_par = 0;
+    int right_par = 0;
+    for (int i = 0; i < len; i++){
+
+        // Check all char possible in the str
+        if ((str[i] < 48 || str[i] > 57) && (!is_operator(str[i]) && (str[i] != 40) && (str[i] != 41))){
+            return false;
+        }
+
+        // Check first char if it's not an operator or a right par
+        if (i == 0){
+            if (str[i] == 41 || is_operator(str[i])){
+                return false;
+            }
+        }
+
+        if (is_operator(str[i])){
+            // Check the next char after an operator
+            if (str[i + 1] < 48 || str[i + 1] > 57 || str[i + 1] == 41 || is_operator(str[i + 1])){
+                return false;
+            }
+        }
+
+        // Check if there is "()"
+        if (str[i] == 40){
+            left_par ++;
+            if (str[i + 1] == 41 || is_operator(str[i + 1])){
+                return false;
+            }
+        }
+
+        // Check parenthese
+        if (str[i] == 41){
+            right_par++;
+
+            // Check if there is ")" before "("
+            if (left_par < 1){
+                return false;
+            }
+
+            // Check if there is more ")" than "("
+            if (left_par < right_par){
+                return false;
+            }
+        }
+    }
+
+    if (left_par != right_par){
+        return false;
+    }
+    return true;
+}
+
+bool check_if_there_is_operator(char *str){
+    uint len = strlen(str);
+
+    for (int i = 0; i < len; i++){
+        if (is_operator(str[i])){
+            return true;
+        }
+    }
+    return false;
+}
+
+
+// Delete the 2 numbers after an operation has been made in the character 
+// string in order to avoid redoing the calculation
+void delete_char_after_operation(op var, uint rank, uint str_len){
+    for (int i = 0; i < str_len; i++){
+        remove_char(var->str, rank);
+    }
+}
+
+void char_calculation(op var){
+    uint len = strlen(var->str);
+    int j = 0;
+    int i = 0;
+    int countnum1 = 0;
+    int countnum2 = 0;
+
+    while(check_if_there_is_operator(var->str)){
+        while (var->str[i] != '\0'){ 
+            
+            // FOR POW
+            if (var->str[i] == 94){
+                j = i;
+                // copy first numb in op->num1
+                while (j > 0 && !is_operator(var->str[j - 1])){
+                    j--;
+                    var->num1[countnum1] = var->str[j];
+                    countnum1++;
+                }
+                inverser(var->num1);
+                j = i;
+
+                // copy second numb in op->num2
+                while(j < len && !is_operator(var->str[j + 1])){
+                    j++;
+                    var->num2[countnum2] = var->str[j];
+                    countnum2++;
+                }
+                // printf("%s (%d) et %s (%d)\n", var->num1, countnum1, var->num2, countnum2);
+                pow_(var);
+                remove_char(var->str, i);
+                delete_char_after_operation(var, i - countnum1, countnum1 + countnum2);
+                var->str[len - countnum1 - countnum2] = '\0';
+                // printf("After delete %s\n", var->str);
+                insert_char(var, i - countnum1, strlen(var->result));
+                printf("%s\n", var->str);
+                delete_string(var, countnum1, countnum2, strlen(var->result));
+                countnum1 = 0;
+                countnum2 = 0;
+                i=0;
+            }
+            i++;
+        }
+        i=0;
+        
+        while (var->str[i] != '\0'){ 
+            
+            // FOR MULTIPLICATION and DIVISION
+            if (var->str[i] == 42 || var->str[i] == 47){
+                len = strlen(var->str);
+                j = i;
+                // copy first numb in op->num1
+                while (j > 0 && !is_operator(var->str[j - 1])){
+                    j--;
+                    var->num1[countnum1] = var->str[j];
+                    countnum1++;
+                }
+                inverser(var->num1);
+                j = i;
+
+                // copy second numb in op->num2
+                while(j < len && !is_operator(var->str[j + 1])){
+                    j++;
+                    var->num2[countnum2] = var->str[j];
+                    countnum2++;
+                }
+                
+                // Put the result in var->result
+                if (var->str[i] == 42) {
+                    multiplication(var, var->num1, var->num2, true);
+                }
+                else {
+                    division(var, var->num1, atoi(var->num2));
+                }
+
+                // Delete the operator between num1 and num2
+                remove_char(var->str, i);
+
+                // Delete the operation to do in the string
+                delete_char_after_operation(var, i - countnum1, countnum1 + countnum2);
+
+                // Terminate correctly the string
+                var->str[len - countnum1 - countnum2] = '\0';
+                // printf("After delete %s\n", var->str);
+                insert_char(var, i - countnum1, strlen(var->result));
+                printf("%s\n", var->str);
+                delete_string(var, countnum1, countnum2, strlen(var->result));
+                // printf("test2 : %s\n", var->str);
+                countnum1 = 0;
+                countnum2 = 0;
+                i=0;
+            }
+            i++;
+        }
+        i = 0;
+
+        while (var->str[i] != '\0'){ 
+            
+            // FOR ADDITION and SUBASTRACTION
+            if (var->str[i] == 43 || var->str[i] == 45){
+                len = strlen(var->str);
+                j = i;
+                // copy first numb in op->num1
+                while (j > 0 && !is_operator(var->str[j - 1])){
+                    j--;
+                    var->num1[countnum1] = var->str[j];
+                    countnum1++;
+                }
+                inverser(var->num1);
+                j = i;
+
+                // copy second numb in op->num2
+                while(j < len && !is_operator(var->str[j + 1])){
+                    j++;
+                    var->num2[countnum2] = var->str[j];
+                    countnum2++;
+                }
+                
+                // Put the result in var->result
+                if (var->str[i] == 43) {
+                    addition(var);
+                }
+                else {
+                    substraction(var);
+                }
+
+                // Delete the operator between num1 and num2
+                remove_char(var->str, i);
+
+                // Delete the operation to do in the string
+                delete_char_after_operation(var, i - countnum1, countnum1 + countnum2);
+
+                // Terminate correctly the string
+                var->str[len - countnum1 - countnum2] = '\0';
+                // printf("After delete %s\n", var->str);
+                insert_char(var, i - countnum1, strlen(var->result));
+                printf("%s\n", var->str);
+                delete_string(var, countnum1, countnum2, strlen(var->result));
+                countnum1 = 0;
+                countnum2 = 0;
+                i=0;
+            }
+            i++;
+        }
+    }
 }
 
 char *int_string(int x, char *str){
