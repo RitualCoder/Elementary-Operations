@@ -41,9 +41,15 @@ void SDL_initAndSetName(SDL_Renderer** pRenderer, SDL_Window** pWindow, env genv
 
 SDL_Texture** make_all_text_texture(SDL_Renderer* pRenderer, char* text[], int nbtext, env genv, SDL_Color textColor);
 
+bool process_check_column(int x, int y, int mouse_x, int mouse_y, int *column);
+
 bool process(SDL_Window *win, SDL_Renderer *ren, SDL_Event *e, bool *FPS, op var);
 
 void printDebug(SDL_Renderer* pRenderer, SDL_Window* pWindow);
+
+void draw_to_calcultate(SDL_Renderer* pRenderer, SDL_Window* pWindow, env genv, char *to_calcultate, uint size_);
+
+void draw_result(SDL_Renderer* pRenderer, SDL_Window* pWindow, env genv, char *to_calcultate, uint size_);
 
 void draw_fps(SDL_Renderer* pRenderer, SDL_Window* pWindow, env genv, char *elapsed);
 

@@ -20,6 +20,7 @@ struct op_s {
     char* num2;
     char* result;
     char* sresult;
+    int indexstr;
 };
 
 typedef struct op_s op_s;

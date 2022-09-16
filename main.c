@@ -3,11 +3,13 @@
 #include <SDL_ttf.h>    // required to use TTF fonts
 #include <stdbool.h>
 #include <stdio.h>
+#include <string.h>
 
 #include "env.h"
 #include "SDL_Menu.h"
 #include "SDL_lib.h"
 #include "./library/aux.h"
+#include "library/private.h"
 
 
 int main(int argc, char* argv[]){
@@ -56,6 +58,7 @@ int main(int argc, char* argv[]){
                 break;
             }
         }
+
         SDL_SetRenderDrawColor(pRenderer, 0, 0, 0, 255);
         SDL_RenderClear(pRenderer);
 
@@ -63,6 +66,8 @@ int main(int argc, char* argv[]){
         SDL_SetRenderDrawColor(pRenderer, 255, 255, 255, 255);
         draw_touch_calc(pRenderer,pWindow, buttons_tex, genv);
         draw_screen(pRenderer, pWindow);
+        draw_to_calcultate(pRenderer, pWindow, genv, var->str, strlen(var->str));
+        draw_result(pRenderer, pWindow, genv, var->result, strlen(var->result));
 
         // FPS LIMIT
         frameTime = SDL_GetTicks() - frameStart;
@@ -87,6 +92,7 @@ int main(int argc, char* argv[]){
 
     quit(genv);
     TTF_Quit();
+    op_delete(var);
     SDL_end(pRenderer, pWindow);
 
     return EXIT_SUCCESS;

@@ -82,13 +82,27 @@ bool remove_char(char *s, int pos){
     return true;
 }
 
-void delete_string(op var, uint str_len1, uint str_len2, uint str_len3){
+void delete_str(op var, uint len) {
+    for (int i = 0; i < len; i++){
+        remove_char(var->str, 0);
+    }
+}
+
+void delete_result(op var, uint len) {
+    for (int i = 0; i < len; i++){
+        remove_char(var->result, 0);
+    }
+}
+
+void delete_string(op var, uint str_len1, uint str_len2){
     for (int i = 0; i < str_len1; i++){
         remove_char(var->num1, 0);
     }
     for (int i = 0; i < str_len2; i++){
         remove_char(var->num2, 0);
     }
+    var->num1[0] = '\0';
+    var->num2[0] = '\0';
 }
 
 void insert_char(op var, int pos, uint str_len){
@@ -138,6 +152,7 @@ op init_(int length){
     assert(operation->result);
     operation->sresult = malloc(length*sizeof(char));
     assert(operation->sresult);
+    operation->indexstr = 0;
     return operation;
 }
 
@@ -242,6 +257,8 @@ void delete_char_after_operation(op var, uint rank, uint str_len){
 
 void char_calculation(op var){
     uint len = strlen(var->str);
+    char temp[50];
+    strcpy(temp, var->str);
     int j = 0;
     int i = 0;
     int countnum1 = 0;
@@ -276,7 +293,7 @@ void char_calculation(op var){
                 // printf("After delete %s\n", var->str);
                 insert_char(var, i - countnum1, strlen(var->result));
                 printf("%s\n", var->str);
-                delete_string(var, countnum1, countnum2, strlen(var->result));
+                delete_string(var, countnum1, countnum2);
                 countnum1 = 0;
                 countnum2 = 0;
                 i=0;
@@ -326,7 +343,7 @@ void char_calculation(op var){
                 // printf("After delete %s\n", var->str);
                 insert_char(var, i - countnum1, strlen(var->result));
                 printf("%s\n", var->str);
-                delete_string(var, countnum1, countnum2, strlen(var->result));
+                delete_string(var, countnum1, countnum2);
                 // printf("test2 : %s\n", var->str);
                 countnum1 = 0;
                 countnum2 = 0;
@@ -377,7 +394,7 @@ void char_calculation(op var){
                 // printf("After delete %s\n", var->str);
                 insert_char(var, i - countnum1, strlen(var->result));
                 printf("%s\n", var->str);
-                delete_string(var, countnum1, countnum2, strlen(var->result));
+                delete_string(var, countnum1, countnum2);
                 countnum1 = 0;
                 countnum2 = 0;
                 i=0;
@@ -385,6 +402,7 @@ void char_calculation(op var){
             i++;
         }
     }
+    strcpy(var->str, temp);
 }
 
 char *int_string(int x, char *str){
