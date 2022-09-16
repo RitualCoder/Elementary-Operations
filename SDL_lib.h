@@ -18,6 +18,7 @@
 #include <stdbool.h>
 
 #include "env.h"
+#include "./library/aux.h"
 
 #define WINDOW_HEIGHT 800
 #define WINDOW_WIDTH 600
@@ -40,7 +41,7 @@ void SDL_initAndSetName(SDL_Renderer** pRenderer, SDL_Window** pWindow, env genv
 
 SDL_Texture** make_all_text_texture(SDL_Renderer* pRenderer, char* text[], int nbtext, env genv, SDL_Color textColor);
 
-bool process(SDL_Window *win, SDL_Renderer *ren, SDL_Event *e, bool *FPS);
+bool process(SDL_Window *win, SDL_Renderer *ren, SDL_Event *e, bool *FPS, op var);
 
 void printDebug(SDL_Renderer* pRenderer, SDL_Window* pWindow);
 

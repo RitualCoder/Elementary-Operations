@@ -221,9 +221,19 @@ void draw_menu(SDL_Renderer* pRenderer, SDL_Window* pWindow, SDL_Texture* items[
 
 
 
-bool process(SDL_Window *win, SDL_Renderer *ren, SDL_Event *e, bool *FPS) {
+bool process(SDL_Window *win, SDL_Renderer *ren, SDL_Event *e, bool *FPS, op var) {
+    int mouse_x, mouse_y;
+    SDL_GetMouseState(&mouse_x, &mouse_y);
+    int w, h;
+    SDL_GetWindowSize(win, &w, &h);
+    
     if (e->type == SDL_QUIT) {
         return false;
+    }
+    if (e->type == SDL_MOUSEBUTTONDOWN) {
+        if (e->button.button == (SDL_BUTTON_LEFT)) {
+
+        }
     }
 
     else if (e->type == SDL_KEYDOWN) {

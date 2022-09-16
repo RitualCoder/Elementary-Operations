@@ -13,7 +13,7 @@
 #define __AUX_H__
 #include <string.h>
 #include <stdbool.h>
-#include "../op.h"
+#include "op.h"
 
 
 /**

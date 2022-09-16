@@ -17,8 +17,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#include "../op_struct/private.h"
-#include "../op.h"
+#include "private.h"
+#include "op.h"
 
 void inverser(char *s){
     int length, c;

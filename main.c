@@ -17,10 +17,16 @@ int main(int argc, char* argv[]){
 
     // init calculator environment
     env genv = init_calc_environment();
+    op var = init_(100);
 
-    // double fps = 0;
-    bool main_loop_run = true;
+    // FPS
+    int FPS = 60;
+    int frameDelay = 1000/FPS;
+    Uint32 frameStart;
+    int frameTime;
     bool show_fps = false;
+
+    bool main_loop_run = true;
 
     init(&pRenderer, &pWindow, genv);
 
@@ -34,14 +40,17 @@ int main(int argc, char* argv[]){
     SDL_Color black = BLACK;
 
     SDL_Texture** buttons_tex = make_all_text_texture(pRenderer, buttons, 20, genv, black);
+
     
     while (main_loop_run){
         Uint64 start = SDL_GetPerformanceCounter();
+        frameStart = SDL_GetTicks();
+
         
 	    
         while (SDL_PollEvent(&e)) {
             // process events
-            main_loop_run = process(pWindow, pRenderer, &e, &show_fps);
+            main_loop_run = process(pWindow, pRenderer, &e, &show_fps, var);
 
             if (!main_loop_run){
                 break;
@@ -54,11 +63,16 @@ int main(int argc, char* argv[]){
         SDL_SetRenderDrawColor(pRenderer, 255, 255, 255, 255);
         draw_touch_calc(pRenderer,pWindow, buttons_tex, genv);
         draw_screen(pRenderer, pWindow);
-        
-        // FPS
+
+        // FPS LIMIT
+        frameTime = SDL_GetTicks() - frameStart;
+        if (frameDelay > frameTime){
+            SDL_Delay(frameDelay - frameTime);
+        }
+
+        // SHOW FPS
         Uint64 end = SDL_GetPerformanceCounter();
         char elapsed[8];
-        
         int fps = 1/((end - start) / (float)SDL_GetPerformanceFrequency());
         int_to_char(fps, elapsed);
         if (show_fps){
