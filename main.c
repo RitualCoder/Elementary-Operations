@@ -48,8 +48,6 @@ int main(int argc, char* argv[]){
         Uint64 start = SDL_GetPerformanceCounter();
         frameStart = SDL_GetTicks();
 
-        
-	    
         while (SDL_PollEvent(&e)) {
             // process events
             main_loop_run = process(pWindow, pRenderer, &e, &show_fps, var);
